@@ -13,6 +13,7 @@ Write wiki files in
 `reStructuredText <https://en.wikipedia.org/wiki/ReStructuredText>`_ (reST)
 or (`pandoc <http://pandoc.org/MANUAL.html#pandocs-markdown>`_)
 `markdown <https://en.wikipedia.org/wiki/Markdown>`_ files.
+Run ``make`` to generate html, text and/or pdf output files.
 
 Write links that end in ".rst" or ".md" in those source files,
 not ".html",
@@ -21,11 +22,6 @@ from within your text editor.
 
 The included ``makefile`` translates links ending in ".rst" or ".md"
 in the source files to ".html" in the output files.
-
-This makes source maintenance easier.
-You could even treat the source files `as` the wiki,
-if you really like your editor,
-and rarely if ever generate output files.
 
 There is no sofware here, only an included makefile,
 an optional included shell script,

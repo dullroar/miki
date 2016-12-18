@@ -23,12 +23,12 @@ MHTML := $(MD:.md=.html)
 MTEXT := $(MD:.md=.txt)
 MPDF := $(MD:.md=.pdf)
 
-HTML := $(RHTML) $(MHTML)
-TEXT := $(RTEXT) $(MTEXT)
-PDF := $(RPDF) $(MPDF)
+HTML := $(sort $(RHTML) $(MHTML))
+TEXT := $(sort $(RTEXT) $(MTEXT))
+PDF := $(sort $(RPDF) $(MPDF))
 
-ALL := $(HTML) $(TEXT) $(PDF)
-ALL_SOURCE := $(RST) $(MD)
+ALL := $(sort $(HTML) $(TEXT) $(PDF))
+ALL_SOURCE := $(sort $(RST) $(MD))
 
 #########################
 ### List-based rules. ###
@@ -52,9 +52,9 @@ clean:
 
 print:
 	@echo "All source:"
-	@echo $(ALL_SOURCE) |tr " " "\n" |sort
+	@echo $(ALL_SOURCE) |tr " " "\n"
 	@echo "All targets:"
-	@echo $(ALL) |tr " " "\n" |sort
+	@echo $(ALL) |tr " " "\n"
 
 #######################
 ### File type rules ###
