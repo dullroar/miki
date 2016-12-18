@@ -23,9 +23,9 @@ MHTML := $(MD:.md=.html)
 MTEXT := $(MD:.md=.txt)
 MPDF := $(MD:.md=.pdf)
 
-HTML := $(sort $(RHTML) $(MHTML))
-TEXT := $(sort $(RTEXT) $(MTEXT))
-PDF := $(sort $(RPDF) $(MPDF))
+HTML := $(RHTML) $(MHTML)
+TEXT := $(RTEXT) $(MTEXT)
+PDF := $(RPDF) $(MPDF)
 
 ALL := $(sort $(HTML) $(TEXT) $(PDF))
 ALL_SOURCE := $(sort $(RST) $(MD))
