@@ -59,11 +59,8 @@ print:
 #######################
 ### File type rules ###
 
-# Prior to running rst2html:
-# - Change "$MWK" if at the beginning of a link to its expanded value.
-#   "\x24" is the ascii hex value of "$".
-#   "|" as s-command separators because the regex and replacements have "/".
-# - Change ".rst" if at the end of a link to ".html".
+# - Expand $(MWK).
+# - Change .rst and .md to .html.
 # - Then run rst2html.
 %.html: %.rst
 	sed -e "s|<\x24MWK/|<$(MWK)/|" \
@@ -77,25 +74,20 @@ print:
 	    -e "s|\.md>\`_|.html>\`_|" \
 	$< |rst2pdf -o $@
 
-# Prior to running markdown:
-# - Change "$MWK" if at the beginning of a link to its expanded value.
-#   "\x24" is the ascii hex value of "$".
-#   "\x28" is the ascii hex value of "(".
-#   "\x29" is the ascii hex value of ")".
-#   "|" as s-command separators because the regex and replacements have "/".
-# - Change ".md" if at the end of a link to ".html".
+# - Expand $(MWK).
+# - Change .rst and .md to .html.
 # - Then run markdown.
 %.html: %.md
 	sed -e "s|\]\x28\x24MWK/|\]\x28$(MWK)/|" \
 	    -e "s|\.md\x29|.html\x29|" \
 	    -e "s|\.rst\x29|.html\x29|" \
-	$< |pandoc -s -V geometry:margin=1in > $@
+	$< |pandoc -s --toc -f markdown -t html -o $@
 
 %.pdf: %.md
 	sed -e "s|\]\x28\x24MWK/|\]\x28$(MWK)/|" \
 	    -e "s|\.md\x29|.html\x29|" \
 	    -e "s|\.rst\x29|.html\x29|" \
-	$< |pandoc -s -V geometry:margin=1in -o $@
+	$< |pandoc -s --toc -V geometry:margin=1in -o $@
 
 %.txt: %.html
 	lynx -dump $< > $@
