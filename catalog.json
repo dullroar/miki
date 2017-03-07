@@ -1,0 +1,94 @@
+[
+  [
+    {
+      "title": "The Wilhelm Scream",
+      "subtitle": "Audio sample",
+      "categoryPrimary": "Civilization",
+      "categorySecondary": "Audio",
+      "link": "file:///home/aaron/Projects/miki/Books/Wilhelm/WilhelmScream.mp3",
+      "source": "https://archive.org/details/WilhelmScreamSample",
+      "note": "Creative Commons, Public Domain",
+      "meta": "file:///home/aaron/Projects/miki/Books/Wilhelm/meta.json"
+    }
+  ],
+  [
+    {
+      "title": "Daily Affirmation",
+      "categoryPrimary": "Civilization",
+      "categorySecondary": "Humor",
+      "note": "Humor inspired/stolen from Senator Al Franken.",
+      "affirmation": [
+        "I am going to make a great personal wiki.",
+        "And I'm going to help people.",
+        "Because I'm good enough, I'm smart enough,",
+        "and gosh darnit people like me."
+      ],
+      "source": {
+        "title": "Stuart Smalley - Daily Affirmations",
+        "link": "https://www.youtube.com/watch?v=6ldAQ6Rh5ZI"
+      },
+      "meta": "file:///home/aaron/Projects/miki/Books/DailyAffirmation/meta.json"
+    }
+  ],
+  [
+    {
+      "title": "Beej's Guide to C Programming",
+      "subtitle": "Rough draft",
+      "categoryPrimary": "Software",
+      "categorySecondary": "C",
+      "link": "file:///home/aaron/Projects/miki/Books/BeejsGuides/bgc_USLetter.pdf",
+      "source": "http://beej.us/guide/bgc/",
+      "meta": "file:///home/aaron/Projects/miki/Books/BeejsGuides/meta.json"
+    },
+    {
+      "title": "Beej's Guide to Network Programming",
+      "subtitle": "Using Internet Sockets",
+      "categoryPrimary": "Software",
+      "categorySecondary": "C",
+      "link": "file:///home/aaron/Projects/miki/Books/BeejsGuides/bgnet_USLetter.pdf",
+      "source": "http://beej.us/guide/bgnet/",
+      "meta": "file:///home/aaron/Projects/miki/Books/BeejsGuides/meta.json"
+    },
+    {
+      "title": "Beej's Guide to Unix IPC",
+      "categoryPrimary": "Software",
+      "categorySecondary": "C",
+      "link": "file:///home/aaron/Projects/miki/Books/BeejsGuides/bgipc_USLetter.pdf",
+      "source": "http://beej.us/guide/bgipc/",
+      "meta": "file:///home/aaron/Projects/miki/Books/BeejsGuides/meta.json"
+    },
+    {
+      "title": "Beej's Quick Guide to GDB",
+      "categoryPrimary": "Software",
+      "categorySecondary": "C",
+      "link": "file:///home/aaron/Projects/miki/Books/BeejsGuides/beej.us/guide/bggdb/index.html",
+      "source": "http://beej.us/guide/bggdb/",
+      "meta": "file:///home/aaron/Projects/miki/Books/BeejsGuides/meta.json"
+    },
+    {
+      "title": "Expert C Programming",
+      "subtitle": "Deep C Secrets",
+      "categoryPrimary": "Software",
+      "categorySecondary": "C",
+      "link": "file:///home/aaron/Projects/miki/Books/DeepCSecrets/Linden_-_Expert_C_Programming__Deep_C_Secrets.pdf",
+      "note": "From the 90s, still excellent, and funny.",
+      "source": "https://duckduckgo.com/?q=deep+c+secrets+linden&t=lm&ia=web",
+      "meta": "file:///home/aaron/Projects/miki/Books/DeepCSecrets/meta.json"
+    }
+  ],
+  [
+    {
+      "title": "Ten Steps to Linux Survival",
+      "subtitle": "Essentials for Navigating the Bash Jungle",
+      "categoryPrimary": "Software",
+      "categorySecondary": "Linux",
+      "link": "file:///home/aaron/Projects/miki/Books/TenStepsToLinuxSurvival/ten-steps-to-linux-survival.pdf",
+      "source": [
+        "http://www.oreilly.com/programming/free/ten-steps-to-linux-survival.csp",
+        "https://github.com/dullroar/ten-steps-to-linux-survival"
+      ],
+      "note": "Jim Lehmer's intro to bash/linux O'Reilly book.",
+      "meta": "file:///home/aaron/Projects/miki/Books/TenStepsToLinuxSurvival/meta.json"
+    }
+  ]
+]

@@ -1,0 +1,34 @@
+{
+    "title": "Beej's Quick Guide to GDB",
+    "categoryPrimary": "Software",
+    "categorySecondary": "C",
+    "link": "$MWK/Books/BeejsGuides/beej.us/guide/bggdb/index.html",
+    "source": "http://beej.us/guide/bggdb/",
+    "meta": "$MWK/Books/BeejsGuides/meta.json"
+}
+{
+    "title": "Beej's Guide to C Programming",
+    "subtitle": "Rough draft",
+    "categoryPrimary": "Software",
+    "categorySecondary": "C",
+    "link": "$MWK/Books/BeejsGuides/bgc_USLetter.pdf",
+    "source": "http://beej.us/guide/bgc/",
+    "meta": "$MWK/Books/BeejsGuides/meta.json"
+}
+{
+    "title": "Beej's Guide to Unix IPC",
+    "categoryPrimary": "Software",
+    "categorySecondary": "C",
+    "link": "$MWK/Books/BeejsGuides/bgipc_USLetter.pdf",
+    "source": "http://beej.us/guide/bgipc/",
+    "meta": "$MWK/Books/BeejsGuides/meta.json"
+}
+{
+    "title": "Beej's Guide to Network Programming",
+    "subtitle": "Using Internet Sockets",
+    "categoryPrimary": "Software",
+    "categorySecondary": "C",
+    "link": "$MWK/Books/BeejsGuides/bgnet_USLetter.pdf",
+    "source": "http://beej.us/guide/bgnet/",
+    "meta": "$MWK/Books/BeejsGuides/meta.json"
+}

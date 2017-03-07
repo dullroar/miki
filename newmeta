@@ -1,0 +1,27 @@
+#! /usr/bin/env bash
+
+# Don't overwrite existing meta.json.
+[ -e meta.json ] && echo "meta.json already exists." && exit 1
+
+# File to link to is the only allowed argument.
+[ $# != 1 ] && echo "Exactly 1 link argument allowed." && exit 2
+
+here=$(pwd)
+expandedLink=$MWK${here#$MWK}/$1
+link=\$MWK${here#$MWK}/$1
+meta=\$MWK${here#$MWK}/meta.json
+
+[ ! -e $expandedLink ] && echo "WARNING: $link not found."
+
+touch meta.json
+cat <<EOF >meta.json
+{
+    "title": "$link",
+    "subtitle": "$link",
+    "categoryPrimary": "none",
+    "categorySecondary": "none",
+    "link": "$link",
+    "note": "Edit all fields except link.",
+    "meta": "$meta"
+}
+EOF
