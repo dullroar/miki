@@ -139,7 +139,7 @@ See the examples in the Books subdirectory of this repo.
 
 Note that there are no actual book files in the Books subdirectories
 of this repo; I didn't want to include binaries in the repo.
-Normally would would have your files alongside your meta.json files
+Normally you would have your files alongside your meta.json files
 in your Books subdirectories. I included a source field for each
 item in the Books examples, if you want to go looking.
 
