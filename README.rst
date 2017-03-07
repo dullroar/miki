@@ -137,6 +137,12 @@ and then delete the link field with your editor.
 Add any legal json you like to your generated meta.json file.
 See the examples in the Books subdirectory of this repo.
 
+Note that there are no actual book files in the Books subdirectories
+of this repo; I didn't want to include binaries in the repo.
+Normally would would have your files alongside your meta.json files
+in your Books subdirectories. I included a source field for each
+item in the Books examples, if you want to go looking.
+
 Writing Links in Your .rst and .md source files
 ===============================================
 
