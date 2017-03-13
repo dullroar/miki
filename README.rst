@@ -239,6 +239,10 @@ is missing or older than its source rst or md file.
 
   $ mwk clean # Remove all generated files.
 
+  $ mwk print # Do nothing but print to the terminal
+              # all rst and md files found,
+              # and all corresponding targets based on source.
+
   $ mwk # Default target is html and catalog. The most common invocation.
 
   $ mwk html # Generate html and catalog targets.
@@ -649,3 +653,4 @@ These two ``meta.json`` files each track a single pdf file.
       └── WilhelmScream.mp3
 
 This ``meta.json`` file tracks an mp3 file.
+

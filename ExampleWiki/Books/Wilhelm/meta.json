@@ -3,8 +3,8 @@
     "subtitle": "Audio sample",
     "categoryPrimary": "Civilization",
     "categorySecondary": "Audio",
-    "link": "$MWK/Books/Wilhelm/WilhelmScream.mp3",
+    "link": "$MWK/ExampleWiki/Books/Wilhelm/WilhelmScream.mp3",
     "source": "https://archive.org/details/WilhelmScreamSample",
     "note": "Creative Commons, Public Domain",
-    "meta": "$MWK/Books/Wilhelm/meta.json"
+    "meta": "$MWK/ExampleWiki/Books/Wilhelm/meta.json"
 }

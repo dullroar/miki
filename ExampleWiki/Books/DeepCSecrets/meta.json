@@ -3,8 +3,8 @@
     "subtitle": "Deep C Secrets",
     "categoryPrimary": "Software",
     "categorySecondary": "C",
-    "link": "$MWK/Books/DeepCSecrets/Linden_-_Expert_C_Programming__Deep_C_Secrets.pdf",
+    "link": "$MWK/ExampleWiki/Books/DeepCSecrets/Linden_-_Expert_C_Programming__Deep_C_Secrets.pdf",
     "note": "From the 90s, still excellent, and funny.",
     "source": "https://duckduckgo.com/?q=deep+c+secrets+linden&t=lm&ia=web",
-    "meta": "$MWK/Books/DeepCSecrets/meta.json"
+    "meta": "$MWK/ExampleWiki/Books/DeepCSecrets/meta.json"
 }

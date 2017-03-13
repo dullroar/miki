@@ -1,5 +1,6 @@
 
 # From .rst or .md, generate .html, .txt, .pdf
+# From all meta.json, generate one catalog.json
 
 ifeq ($(MWK),)
   $(error You must set environment variable MWK\
@@ -34,8 +35,8 @@ PDF := $(RPDF) $(MPDF)
 ALL := $(sort $(HTML) $(TEXT) $(PDF))
 ALL_SOURCE := $(sort $(RST) $(MD))
 
-#########################
-### List-based rules. ###
+#####################
+### Target rules. ###
 
 # Generate .html files from all .rst and .md files.
 html: $(HTML)
@@ -60,11 +61,12 @@ clean:
 print:
 	@echo "All source:"
 	@echo $(ALL_SOURCE) |tr " " "\n"
+	@echo $(sort $(META)) |tr " " "\n"
 	@echo "All targets:"
 	@echo $(ALL) |tr " " "\n"
 
-#######################
-### File type rules ###
+#############################
+### File generation rules ###
 
 # - Expand $(MWK).
 # - Change .rst and .md to .html.

@@ -2,10 +2,13 @@
     "title": "Daily Affirmation",
     "categoryPrimary": "Civilization",
     "categorySecondary": "Humor",
-    "note": "Humor inspired/stolen from Senator Al Franken.",
+    "note": [
+        "Humor inspired/stolen from Senator Al Franken.",
+        "I am delighted that the words 'Senator Al Franken' are spoken by millions of people."
+    ],
     "affirmation": [
         "I am going to make a great personal wiki.",
-        "And I'm going to help people.",
+        "And I am going to help people.",
         "Because I'm good enough, I'm smart enough,",
         "and gosh darnit people like me."
     ],
@@ -13,5 +16,5 @@
         "title": "Stuart Smalley - Daily Affirmations",
         "link": "https://www.youtube.com/watch?v=6ldAQ6Rh5ZI"
     },
-    "meta": "$MWK/Books/DailyAffirmation/meta.json"
+    "meta": "$MWK/ExampleWiki/Books/DailyAffirmation/meta.json"
 }

@@ -9,10 +9,10 @@ header-includes:
 ---
 
 Unnecessary link to
-[Top]($MWK/UnnecessaryNavigationFile.rst)
+[Top]($MWK/ExampleWiki/UnnecessaryNavigationFile.rst)
 
 The source for this page is $MWK/TopicX/mdTopicX.md.
 
 It links to the other page in this topic:
 
-[Topic X Restructured Text Page]($MWK/TopicX/rstTopicX.rst)
+[Topic X Restructured Text Page]($MWK/ExampleWiki/TopicX/rstTopicX.rst)
