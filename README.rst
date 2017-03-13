@@ -12,8 +12,8 @@ Minimal makefile-based personal wiki
 * Write wiki pages in `reStructuredText
   <https://en.wikipedia.org/wiki/ReStructuredText>`__ (rst)
   or `Markdown
-  <https://en.wikipedia.org/wiki/Markdown>`__ (md),
-  or both.
+  <https://en.wikipedia.org/wiki/Markdown>`__ (md).
+  Both types can be in the same wiki.
 * Run ``make`` to output html, and/or pdf, and/or plain text.
 * Read your wiki pages.
 * Optionally catalogs any book/media files in your wiki.
@@ -535,7 +535,7 @@ Read the various included ``meta.json`` files in ExampleWiki.
 It's pretty flexible.
 
 I don't use category directories, like, say `Science`,
-with all science book directores under there;
+with all science book directories under there;
 that way lies madness and maintenance.
 All organization is done in the ``catalog.json`` generated file,
 based on categories in the individual ``meta.json`` files.
