@@ -18,7 +18,7 @@ Minimal makefile-based personal wiki
 * Read your wiki pages.
 * Optionally catalogs any book/media files in your wiki.
 
-No software provided, just a makefile and two convenience scripts.
+No software provided, just a ``makefile`` and two convenience scripts.
 
 No templates provided.
 Your wiki pages will look very much like the page that you're reading now.
@@ -55,6 +55,13 @@ Get Started
 Prerequisites
 -------------
 
+* A good plain text editor, i.e. a programmer's editor.
+  I prefer Vim. Emacs is equally good.
+  There is probably a more recent good editor in the CoolKids Collection™.
+
+  * A bare-bones basic text editor will work too,
+    but won't be nearly as fun or useful.
+
 * A browser. I prefer Firefox. Chrome(ium) is good.
 
   * These addons are highly recommended,
@@ -77,7 +84,7 @@ Prerequisites
 * Linux.
 * Gnu make.
 * lynx, for html to text generation.
-* jq, for meta.json to catalog.json generation.
+* jq, for ``meta.json`` to ``catalog.json`` generation.
 * reStructuredText-specific.
 
   * docutils, for rst2html.
@@ -98,11 +105,13 @@ Installation
 ------------
 
 * Recommended: git clone this repo, or download its zip and extract.
-* Or, very minimally, download these three files:
+* Or, very minimally, download these files:
 
-  * makefile
-  * mwk
-  * newmeta
+  * ``makefile``
+  * ``mwk``
+  * ``newmeta``
+  * ``rstStarter.rst``
+  * ``mdStarter.md``
 
 * Create a directory for your wiki.
   I use ``~/MyMiki`` for these examples.
@@ -112,10 +121,10 @@ Installation
 
   $ mkdir ~/MyMiki
 
-* Configure the MWK environment variable to point to your wiki.
-  The makefile and the two convenience scripts require it.
+* Configure the ``MWK`` environment variable to point to your wiki.
+  The ``makefile`` and the two convenience scripts require it.
 
-  * Put the following in your .bashrc or other shell's startup script,
+  * Put the following in your ``.bashrc`` or other shell's startup script,
     then start a new shell or terminal tab so that it takes effect.
   * The name (left hand side) must be ``MWK``.
     The value (right hand side) is
@@ -134,19 +143,19 @@ Installation
 
 ::
 
-  $ cd /place/where/you/downloaded/or/cloned/the/three/files
+  $ cd /place/where/you/downloaded/or/cloned/the/files
   $ cp mwk newmeta ~/bin/. # Or wherever you keep your shell scripts.
   $ cd ~/bin
   $ chmod ug+x mwk newmeta # Make them executable.
 
-* Copy the makefile to your wiki.
+* Copy the ``makefile``, and two starter files, to your wiki.
 
 ::
 
-  $ cd /place/where/you/downloaded/or/cloned/the/three/files
-  $ cp makefile $MWK/.
+  $ cd /place/where/you/downloaded/or/cloned/the/files
+  $ cp makefile mdStarter.md rstStarter.rst $MWK/.
 
-* Optional, but recommended: Copy the ExampleWiki to your wiki,
+* Optional, but recommended: Copy the ``ExampleWiki`` to your wiki,
   for something to start with.
 
 ::
@@ -169,6 +178,8 @@ Check the Installation
   $ ls -1 $MWK
   ExampleWiki
   makefile
+  mdStarter.md
+  rstStarter.rst
 
   # NOTE: The pdf and other resource files under Books are empty
   # placeholder files; I'm not distributing other peoples' files.
@@ -197,8 +208,6 @@ Check the Installation
   │   └── Wilhelm
   │       ├── meta.json
   │       └── WilhelmScream.mp3
-  ├── mdStarter.md
-  ├── rstStarter.rst
   ├── TopicA
   │   └── topicA.rst
   ├── TopicX
@@ -240,7 +249,7 @@ is missing or older than its source rst or md file.
   $ mwk clean # Remove all generated files.
 
   $ mwk print # Do nothing but print to the terminal
-              # all rst and md files found,
+              # all rst, md and meta.json source files found,
               # and all corresponding targets based on source.
 
   $ mwk # Default target is html and catalog. The most common invocation.
@@ -251,9 +260,9 @@ is missing or older than its source rst or md file.
 
   $ mwk pdf # Just generate pdf output files from rst and md files.
 
-  $ mwk text # Generates html files, and then text files from those.
+  $ mwk text # Generate html files, and then text files from those.
 
-  $ mwk all # Generates all output file types.
+  $ mwk all # Generate all output file types.
 
   $ mwk -B [target] # Force generation, regardless of up to dateness.
                     # Options like -B are passed through to make.
@@ -276,8 +285,6 @@ is missing or older than its source rst or md file.
 
   $ ls -1
   Books
-  mdStarter.md
-  rstStarter.rst
   TopicA
   TopicX
   UnnecessaryNavigationFile.rst
@@ -287,17 +294,27 @@ is missing or older than its source rst or md file.
 
   $ ls -1
   Books
-  mdStarter.html
-  mdStarter.md
-  rstStarter.html
-  rstStarter.rst
   TopicA
   TopicX
   UnnecessaryNavigationFile.html
   UnnecessaryNavigationFile.rst
 
-Now there are three new html files.
-The topic directories also have new html files.
+There's a new ``catalog.json`` at the top of the wiki,
+and new html files wherever an rst or md file is found.
+(The ``index.html`` file below was already there,
+it's not based on an rst or md file.)
+
+::
+
+  $ find .. -name "*.html" -o -name "catalog.json" |sort
+  ../catalog.json
+  ../ExampleWiki/Books/BeejsGuides/beej.us/guide/bggdb/index.html
+  ../ExampleWiki/TopicA/topicA.html
+  ../ExampleWiki/TopicX/mdTopicX.html
+  ../ExampleWiki/TopicX/rstTopicX.html
+  ../ExampleWiki/UnnecessaryNavigationFile.html
+  ../mdStarter.html
+  ../rstStarter.html
 
 Read and navigate Miki
 ----------------------
@@ -337,15 +354,15 @@ Drill down to a page somewhere down in your wiki.
 Now decide to go to the top of the wiki
 (or anywhere in between, if you like).
 
-I'll go to a page in TopicA.
-There's no purely navigational link,
+I'll go to a page in ``TopicA``.
+There's no purely navigational link on the page,
 and specifically no link to the top.
 
 You could repeatedly click the back button,
 and depending on the route you took to get to this file,
 you might end up where you want. Or not.
 
-Uppity/Up let's you move up the URL levels,
+Uppity/Up lets you move up the URL levels,
 similar to moving up in a file manager.
 
 .. figure:: uppity.png
@@ -355,13 +372,13 @@ similar to moving up in a file manager.
 
    The current URL exposed
 
-* I'm viewing topicA.html.
+* I'm viewing ``topicA.html``.
 * I want to go to the top of the wiki.
 * Click on Uppity's dropdown, next to the green swoop arrow.
 
-  * We're down at topicA.html in the URL.
+  * We're down at ``topicA.html`` in the URL.
   * All URL levels are available to choose.
-  * I've moved the mouse to .../MyMiki.
+  * I've moved the mouse to ``.../MyMiki``.
   * If I click there, that directory will be displayed.
 
 If you click on the green swoop arrow itself, instead of the dropdown,
@@ -370,16 +387,60 @@ Uppity will immediately move you up one URL level.
 Write links in your rst and md source files
 -------------------------------------------
 
+In your rst and md source files,
+when linking to html files that are generated from rst or md files,
+
+::
+
+  ``file:///home/aaron/MyMiki/ExampleWiki/TopicA/topicA.html``
+
+should instead be written as
+
+::
+
+  ``$MWK/ExampleWiki/TopicA/topicA.rst``.
+
+or
+
+::
+
+  ``$MWK/ExampleWiki/TopicA/topicA.md``.
+
+depending on whether the generated html file
+is based on an rst or md source file.
+
+``mwk`` will translate these to full and proper ``.html`` links
+in the generated html files.
+
+You write links to generated files with ``.md`` or ``.rst`` endings
+so that you can jump from source file to source file in your text editor.
+In Vim, for example, put the cursor on a file name, then ``gf``
+will open that file in Vim. You probably want to go to the rst or md file,
+not the generated html or pdf file.
+
+You replace ``file:///path/to/my/wiki`` with ``$MWK``
+because it's easier to write,
+and you'll be able to move your wiki to another directory or machine
+without link breakage. Vim understands the environment variable,
+and will happily open the rst or md file.
+
 * In your rst files,
   write your links to other wiki pages/files like this:
 
 ::
 
+  # Link to one of your rst source files.
+  # This will be turned into an html link in the generated html file.
+  #
   `Topic A <$MWK/ExampleWiki/TopicA/topicA.rst>`__
   (that's two underscores at the end)
 
+  # Link to a pdf file that you've copied in.
+  #
   `Some pdf <$MWK/ExampleWiki/TopicA/somePdf.pdf>`__
 
+  # Link to an html file that you've copied in.
+  #
   `html file that you copied in, not based on an rst file
   <$MWK/ExampleWiki/TopicA/copiedExternal.html>`__
 
@@ -391,17 +452,24 @@ Write links in your rst and md source files
 ::
 
   `Topic M <$MWK/ExampleWiki/TopicM/topicM.md>`__
-  (We're still in an rst file, so we write rst style links.)
+  (We're in an rst file, so we write rst style links.)
 
 * In your md files,
   write your links to other wiki pages/files like this:
 
 ::
 
+  # Link to one of your md source files.
+  # This will be turned into an html link in the generated html file.
+  #
   [Topic Z]($MWK/ExampleWiki/TopicZ/topicZ.md>)
 
+  # Link to a pdf file that you've copied in.
+  #
   [Some pdf]($MWK/ExampleWiki/TopicZ/topicZ.pdf>)
 
+  # Link to an html file that you've copied in.
+  #
   [html file that you copied in, not based on an md file]($MWK/ExampleWiki/TopicZ/copiedExternal.html>)
 
   [External web page](https://en.wikipedia.org/wiki/Main_Page)
@@ -411,31 +479,16 @@ Write links in your rst and md source files
 ::
 
   [Topic T]($MWK/ExampleWiki/TopicT/topicT.rst>)
-  (We're still in an md file, so we write md style links.)
+  (We're in an md file, so we write md style links.)
 
+Still not clear?
+Run ``mwk``, then compare a ``.rst`` file
+with its generated ``.html`` file,
+and see how ``$MWK`` and ``.rst`` in the rst file
+get changed to proper links in the html file.
 
-In the rst and md files that you write,
-links to other rst and md files should be written
-with their .rst and .md suffixes, not .html.
-This allows you to take advantage of a feature in some editors (e.g. Vim)
-where you can jump to the file under the cursor.
-
-``mwk`` will translate those endings to .html,
-so that the generated html pages' links point to other html pages.
-
-You should also shorten your file URLs by substituting ``$MWK``
-for the top of your wiki location.
-This lets you rename your wiki's top level directory name
-(as long as you redefine the MWK environment variable),
-or move it to another directory, or to another machine,
-and start over with a new name,
-and not break internal links.
-
-Also, good text editors like Vim understand the environment variable,
-so jumping to the file under the cursor works fine.
-
-During file generation, ``mwk`` will expand the variable,
-and prepend ``file://`` so the browser can get to the generated file.
+Do the same comparison between a ``.md`` file
+and its generated ``.html`` file.
 
 Catalog
 -------
@@ -466,7 +519,7 @@ I find it convenient to keep all my books there,
 whether I link to them or not.
 
 The included ``newmeta`` script
-will create a starter meta.json file for you:
+will create a starter ``meta.json`` file for you:
 
 ::
 
@@ -485,7 +538,7 @@ will create a starter meta.json file for you:
       "meta": "$MWK/anywhere/DirectoryThatHasYourBook/meta.json"
   }
 
-The following targets will build the catalog.
+The following targets will build ``$MWK/catalog.json``.
 
 ::
 
@@ -498,7 +551,7 @@ The following targets will build the catalog.
  $ mwk all
 
 ``$MWK/catalog.json`` is generated at the very top of the wiki,
-regardless of where the ``meta.json`` files are found.
+regardless of where in the wiki the ``meta.json`` files are found.
 
 I organize my books and other resource media under a single ``Books``
 directory, with one directory per resource.
@@ -531,10 +584,7 @@ directory; scatter them throughout your wiki if you like.
       ├── meta.json
       └── WilhelmScream.mp3
 
-Read the various included ``meta.json`` files in ExampleWiki.
-It's pretty flexible.
-
-I don't use category directories, like, say `Science`,
+I don't use category directories, like, say, `Books/Science/`,
 with all science book directories under there;
 that way lies madness and maintenance.
 All organization is done in the ``catalog.json`` generated file,
@@ -545,15 +595,11 @@ then you can think of it like this:
 
 * The Books directory is like a sql table.
 * Each book directory under Books is a record.
-* The fields in meta.json are columns.
+* The fields in ``meta.json`` are columns.
 * The link field points to a binary blob.
-* The title field is the primary key.
-
-  * Or the individual book directory is the primary key.
-  * Or, most of the fields are a compound primary key.
-  * This is a loose analogy.
-
-* The category fields in meta.json are foreign keys.
+* The title field is (very loosely) the primary key.
+* The category fields are foreign keys
+  to the sections in ``catalog.json`` where those categories end up.
 
 Here's ``Wilhelm/meta.json``:
 
@@ -586,16 +632,16 @@ sorted by title and grouped by categories.
 If you also have a "link" field,
 whose value is a link to the book or other resource,
 then ``catalog.json`` will include that link,
-and you can easily browse your books.
+and you can easily browse your books in ``catalog.json``.
 
     In Firefox,
     the recommended addon JsonView makes the link fields clickable.
     In Chrome, I have not found any json viewer addon
     that will make a ``file:`` URL clickable. YMMV.
 
-Every field in a meta.json object is optional,
+Every field in a ``meta.json`` object is optional,
 and you can add new fields.
-The only requirement is that inside an object must be valid json.
+The only requirement is that everything inside an object must be valid json.
 
 * Read the ``meta.json`` files included with ``ExampleWiki``
   for ideas on how to document your resources.
@@ -622,7 +668,7 @@ with four json objects.
 Note that the four top-level json objects in ``meta.json``
 are `not` separated by commas.
 Everything `within` a top level object must be legal json,
-but the object(s) at the top of a meta.json file
+but the object(s) at the top of a ``meta.json`` file
 are free floating in the universe until ``mwk``
 collects them into an array in ``catalog.json``.
 
@@ -632,7 +678,7 @@ collects them into an array in ``catalog.json``.
   │   └── meta.json
 
 This ``meta.json`` file does not track a file on disk,
-it just tracks a thought, contained in `meta.json` as a note.
+it just tracks a thought, contained in ``meta.json`` as a note.
 It shows up in ``$MWK/catalog.json`` like any other tracked resource.
 
 ::
@@ -653,4 +699,3 @@ These two ``meta.json`` files each track a single pdf file.
       └── WilhelmScream.mp3
 
 This ``meta.json`` file tracks an mp3 file.
-

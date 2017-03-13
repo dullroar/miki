@@ -16,12 +16,12 @@ meta=\$MWK${here#$MWK}/meta.json
 touch meta.json
 cat <<EOF >meta.json
 {
-    "title": "$link",
-    "subtitle": "$link",
+    "title": "$1",
+    "subtitle": "$1",
     "categoryPrimary": "none",
     "categorySecondary": "none",
     "link": "$link",
-    "note": "Edit all fields except link.",
+    "note": "Edit all fields except link and meta.",
     "meta": "$meta"
 }
 EOF
