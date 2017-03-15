@@ -72,7 +72,11 @@ Prerequisites
 
     * Firefox: `Uppity
       <https://addons.mozilla.org/en-US/firefox/addon/uppity/>`__
-      (I use this all the time, for Miki, and the web in general.)
+      I use this all the time, for Miki, and the web in general.
+      Still works for me, but might be abandoned.
+    * Firefox: `Navigate Up WE
+      <https://addons.mozilla.org/en-US/firefox/addon/navigate-up-we/>`__
+      Similar to Uppity, has a recent update in December 2016.
     * Chrome: `Up
       <https://chrome.google.com/webstore/detail/up/iohgglcbddjknnemakghbjadinmopafl>`__
       (Similar to Uppity.)
