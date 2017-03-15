@@ -142,4 +142,4 @@ $(SITE):
 	@echo
 	# Generate sitemap.
 	#
-	tree -H $(MWK) -T "$(MWK) sitemap" > $@
+	tree -H $(MWK) -T "$(MWK) sitemap" $(MWK) > $@
