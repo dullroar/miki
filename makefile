@@ -13,6 +13,7 @@ endif
 # Find all meta.json files, for building a catalog.
 META := $(shell find $(MWK) -type f -name "meta.json")
 CATA := $(MWK)/catalog.json
+SITE := $(MWK)/sitemap.html
 
 # Find all .rst files at $MWK and below.
 # Create corresponding target lists for .html, .txt, .pdf.
@@ -28,7 +29,7 @@ MHTML := $(MD:.md=.html)
 MTEXT := $(MD:.md=.txt)
 MPDF := $(MD:.md=.pdf)
 
-HTML := $(RHTML) $(MHTML) $(CATA)
+HTML := $(RHTML) $(MHTML) $(CATA) $(SITE)
 TEXT := $(RTEXT) $(MTEXT)
 PDF := $(RPDF) $(MPDF)
 
@@ -53,9 +54,12 @@ all: $(ALL)
 # Generate a catalog of all meta.json files.
 catalog: $(CATA)
 
+# Generate sitemap
+sitemap: $(SITE)
+
 # Clean all the things!
 clean:
-	@rm -f $(ALL)
+	rm -f $(ALL)
 	@echo cleaned
 
 print:
@@ -133,3 +137,9 @@ $(CATA): $(META)
 	cat $(CATA) |jq \
 	  'sort_by(.title) |group_by(.categoryPrimary, .categorySecondary)' \
 	  > $(CATA).tmp && mv $(CATA).tmp $(CATA)
+
+$(SITE):
+	@echo
+	# Generate sitemap.
+	#
+	tree -H $(MWK) -T "$(MWK) sitemap" > $@

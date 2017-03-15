@@ -15,6 +15,9 @@ Minimal makefile-based personal wiki
   <https://en.wikipedia.org/wiki/Markdown>`__ (md).
   Both types can be in the same wiki.
 * Run ``make`` to output html, and/or pdf, and/or plain text.
+
+  * Also generates a sitemap for the whole wiki.
+
 * Read your wiki pages.
 * Optionally catalogs any book/media files in your wiki.
 
@@ -85,6 +88,7 @@ Prerequisites
 * Gnu make.
 * lynx, for html to text generation.
 * jq, for ``meta.json`` to ``catalog.json`` generation.
+* tree, for generating the sitemap.
 * reStructuredText-specific.
 
   * docutils, for rst2html.
@@ -185,7 +189,7 @@ Check the Installation
   # placeholder files; I'm not distributing other peoples' files.
   #
   $ cd $MWK
-  $ tree ExampleWiki # sudo apt-get tree, or ls -1R ExampleWiki
+  $ tree ExampleWiki
   ExampleWiki
   ├── Books
   │   ├── BeejsGuides
@@ -252,11 +256,13 @@ is missing or older than its source rst or md file.
               # all rst, md and meta.json source files found,
               # and all corresponding targets based on source.
 
-  $ mwk # Default target is html and catalog. The most common invocation.
+  $ mwk # Default target is html, catalog and sitemap. The most common invocation.
 
-  $ mwk html # Generate html and catalog targets.
+  $ mwk html # Generate html, catalog and sitemap targets.
 
   $ mwk catalog # Just generate the catalog.
+
+  $ mwk sitemap # Just generate the sitemap.
 
   $ mwk pdf # Just generate pdf output files from rst and md files.
 
@@ -299,10 +305,14 @@ is missing or older than its source rst or md file.
   UnnecessaryNavigationFile.html
   UnnecessaryNavigationFile.rst
 
-There's a new ``catalog.json`` at the top of the wiki,
-and new html files wherever an rst or md file is found.
-(The ``index.html`` file below was already there,
-it's not based on an rst or md file.)
+* New files: 
+
+  * ``catalog.json`` at the top of the wiki.
+  * ``sitemap.html`` at the top of the wiki.
+  * New html files wherever an rst or md file is found.
+
+    * (The ``index.html`` file below was already there,
+      it's not based on an rst or md file.)
 
 ::
 
@@ -315,6 +325,7 @@ it's not based on an rst or md file.)
   ../ExampleWiki/UnnecessaryNavigationFile.html
   ../mdStarter.html
   ../rstStarter.html
+  ../sitemap.html
 
 Read and navigate Miki
 ----------------------
@@ -347,7 +358,12 @@ and you'll have to fix fewer broken links when you move things around.
 
 * Click down through the topic directories and pages as needed.
 
-Here's where the Firefox Uppity addon,
+``mwk`` generates a sitemap,
+at ``$MWK/sitemap.html``.
+All files in the wiki are listed and clickable.
+
+For moving up and down from where you happen to be,
+here's where the Firefox Uppity addon,
 or the Chrome Up addon, shows its worth.
 
 Drill down to a page somewhere down in your wiki.
