@@ -101,12 +101,10 @@ Prerequisites
 * Markdown-specific.
 
   * pandoc, for markdown to html generation.
-  * pandoc and latex, for markdown to pdf generation.
+  * texlive-latex-base, for md to pdf generation
+  * texlive-latex-extra
+  * lmodern
 
-    * I installed ``texlive-latex-base`` and ``lmodern``.
-      Let your package manager pull in the rest,
-      and then install anything that's complained about
-      when you generate your pages.
     * The names of packages on your system may differ.
 
 Installation
