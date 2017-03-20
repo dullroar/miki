@@ -11,7 +11,8 @@ header-includes:
 Unnecessary link to
 [Top]($MWK/ExampleWiki/UnnecessaryNavigationFile.rst)
 
-The source for this page is $MWK/TopicX/mdTopicX.md.
+The source for this page is
+$MWK/ExampleWiki/TopicX/mdTopicX.md.
 
 It links to the other page in this topic:
 
