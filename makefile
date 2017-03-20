@@ -69,6 +69,24 @@ print:
 	@echo "All targets:"
 	@echo $(ALL) |tr " " "\n"
 
+# goodlinks and badlinks only differ on their second lines:
+# "&&" vs "||"
+goodlinks: $(HTML)
+	@ echo
+	# Any local links found in files, and the links exist in $(MWK)
+	@for f in $$(grep -ohE 'href="[^"]*"' $$(find $$MWK -type f) |grep $$MWK |grep -oE '/home[^"]+') ; do \
+	    [ -e $$f ] && grep -on $$f $$(find $$MWK -type f) ; \
+	done |sort -u
+
+badlinks: $(HTML)
+	@ echo
+	# Any local links found in files, and the links DO NOT EXIST in $(MWK)
+	# From the file on the left of ':', determine the source file,
+	# and fix the link.
+	@for f in $$(grep -ohE 'href="[^"]*"' $$(find $$MWK -type f) |grep $$MWK |grep -oE '/home[^"]+') ; do \
+	    [ -e $$f ] || grep -on $$f $$(find $$MWK -type f) ; \
+	done |sort -u
+
 #############################
 ### File generation rules ###
 

@@ -275,6 +275,10 @@ is missing or older than its source rst or md file.
   $ mwk -B [target] # Force generation, regardless of up to dateness.
                     # Options like -B are passed through to make.
 
+  $ mwk badlinks # Look for local links in local files that are invalid.
+
+  $ mwk goodlinks # Look for local links in local files that are valid.
+
 * Generate html files.
 
 ::
