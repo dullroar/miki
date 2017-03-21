@@ -164,6 +164,14 @@ Installation
 * Optional, but recommended: Copy the ``ExampleWiki`` to your wiki,
   for something to start with.
 
+  * NOTE: ExampleWiki is for demo/test.
+    I recommend that you do not add any of your own files there,
+    and you might want to delete the ExampleWiki directory
+    when you don't need it anymore.
+    Put your own topic directories directly under $MWK.
+    In other words, ExampleWiki is a topic directory that you'll
+    eventually want to get rid of.
+
 ::
 
   $ cd /place/where/you/cloned/or/unzipped/the/repo
