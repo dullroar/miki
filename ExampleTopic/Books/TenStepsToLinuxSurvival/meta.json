@@ -3,11 +3,11 @@
     "subtitle": "Essentials for Navigating the Bash Jungle",
     "categoryPrimary": "Software",
     "categorySecondary": "Linux",
-    "link": "$MWK/ExampleWiki/Books/TenStepsToLinuxSurvival/ten-steps-to-linux-survival.pdf",
+    "link": "$MWK/ExampleTopic/Books/TenStepsToLinuxSurvival/ten-steps-to-linux-survival.pdf",
     "source": [
         "http://www.oreilly.com/programming/free/ten-steps-to-linux-survival.csp",
         "https://github.com/dullroar/ten-steps-to-linux-survival"
     ],
     "note": "Jim Lehmer's intro to bash/linux O'Reilly book.",
-    "meta": "$MWK/ExampleWiki/Books/TenStepsToLinuxSurvival/meta.json"
+    "meta": "$MWK/ExampleTopic/Books/TenStepsToLinuxSurvival/meta.json"
 }

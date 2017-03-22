@@ -1,0 +1,9 @@
+*.html
+*.pdf
+*.txt
+!ExampleTopic/Books/BeejsGuides/beej.us/guide/bggdb/index.html
+!ExampleTopic/Books/BeejsGuides/bgc_USLetter.pdf
+!ExampleTopic/Books/BeejsGuides/bgipc_USLetter.pdf
+!ExampleTopic/Books/BeejsGuides/bgnet_USLetter.pdf
+!ExampleTopic/Books/DeepCSecrets/Linden_-_Expert_C_Programming__Deep_C_Secrets.pdf
+!ExampleTopic/Books/TenStepsToLinuxSurvival/ten-steps-to-linux-survival.pdf

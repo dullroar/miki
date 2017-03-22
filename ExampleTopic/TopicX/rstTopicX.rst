@@ -3,11 +3,11 @@ Topic X Restructured Text Page
 <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
 
 Unnecessary link to
-`Top <$MWK/ExampleWiki/UnnecessaryNavigationFile.rst>`__.
+`Top <$MWK/ExampleTopic/UnnecessaryNavigationFile.rst>`__.
 
 The source for this page is
-$MWK/ExampleWiki/TopicX/rstTopicX.rst
+$MWK/ExampleTopic/TopicX/rstTopicX.rst
 
 It links to the other page in this topic:
 
-`Topic X Markdown Page <$MWK/ExampleWiki/TopicX/mdTopicX.md>`__.
+`Topic X Markdown Page <$MWK/ExampleTopic/TopicX/mdTopicX.md>`__.
