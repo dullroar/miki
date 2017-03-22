@@ -59,7 +59,7 @@ sitemap: $(SITE)
 
 # Clean all the things!
 clean:
-	rm -f $(ALL)
+	@rm -f $(ALL)
 	@echo cleaned
 
 print:

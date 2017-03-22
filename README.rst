@@ -17,9 +17,9 @@ Minimal makefile-based personal wiki
 * Run ``make`` to output html, and/or pdf, and/or plain text.
 
   * Also generates a sitemap for the whole wiki.
+  * Optionally catalogs any book/media files in your wiki.
 
 * Read your wiki pages.
-* Optionally catalogs any book/media files in your wiki.
 
 No software provided, just a ``makefile`` and two convenience scripts.
 
@@ -101,16 +101,17 @@ Prerequisites
 * Markdown-specific.
 
   * pandoc, for markdown to html generation.
-  * texlive-latex-base, for md to pdf generation
-  * texlive-latex-extra
-  * lmodern
+  * tex, for md to pdf generation.
 
     * The names of packages on your system may differ.
+    * texlive-latex-base.
+    * texlive-latex-extra.
+    * lmodern.
 
 Installation
 ------------
 
-* Recommended: git clone this repo, or download its zip and extract.
+* Recommended: ``git clone`` this repo, or download its zip and extract.
 * Or, very minimally, download these files:
 
   * ``makefile``
@@ -154,28 +155,20 @@ Installation
   $ cd ~/bin
   $ chmod ug+x mwk newmeta # Make them executable.
 
-* Copy the ``makefile``, and two starter files, to your wiki.
+* Copy ``ExampleTopic``, the ``makefile``,
+  and two starter files, to your wiki.
 
 ::
 
   $ cd /place/where/you/downloaded/or/cloned/the/files
-  $ cp makefile mdStarter.md rstStarter.rst $MWK/.
+  $ cp -r ExampleTopic makefile mdStarter.md rstStarter.rst $MWK/.
 
-* Optional, but recommended: Copy the ``ExampleWiki`` to your wiki,
-  for something to start with.
+* NOTE: ExampleTopic is for demo/test.
 
-  * NOTE: ExampleWiki is for demo/test.
-    I recommend that you do not add any of your own files there,
-    and you might want to delete the ExampleWiki directory
-    when you don't need it anymore.
-    Put your own topic directories directly under $MWK.
-    In other words, ExampleWiki is a topic directory that you'll
-    eventually want to get rid of.
-
-::
-
-  $ cd /place/where/you/cloned/or/unzipped/the/repo
-  $ cp -r ExampleWiki $MWK/.
+  * I recommend that you do not add any of your own files under that topic.
+  * Start your own topic directories directly under ``$MWK``.
+  * You can leave ExampleTopic in your wiki,
+    or delete it when you don't need the example anymore.
 
 Check the Installation
 ----------------------
@@ -190,7 +183,7 @@ Check the Installation
   /home/aaron/bin/newmeta
 
   $ ls -1 $MWK
-  ExampleWiki
+  ExampleTopic
   makefile
   mdStarter.md
   rstStarter.rst
@@ -199,8 +192,8 @@ Check the Installation
   # placeholder files; I'm not distributing other peoples' files.
   #
   $ cd $MWK
-  $ tree ExampleWiki
-  ExampleWiki
+  $ tree ExampleTopic
+  ExampleTopic
   ├── Books
   │   ├── BeejsGuides
   │   │   ├── beej.us
@@ -284,8 +277,10 @@ is missing or older than its source rst or md file.
                     # Options like -B are passed through to make.
 
   $ mwk badlinks # Look for local links in local files that are invalid.
+                 # Very handy after moving topics around.
 
   $ mwk goodlinks # Look for local links in local files that are valid.
+                  # Not as useful as badlinks. I never use it.
 
 * Generate html files.
 
@@ -295,10 +290,10 @@ is missing or older than its source rst or md file.
   # even outside the wiki, and the files will be generated
   # in their proper places.
   #
-  # For the moment, we care about what happens in ExampleWiki,
+  # For the moment, we care about what happens in ExampleTopic,
   # so we'll go there.
   #
-  $ cd $MWK/ExampleWiki
+  $ cd $MWK/ExampleTopic
 
   $ mwk clean # Just to be sure we're both starting from zero.
   cleaned
@@ -311,6 +306,17 @@ is missing or older than its source rst or md file.
 
   $ mwk
   ... make output ..
+
+  $ ls -1 ..
+  catalog.json
+  ExampleTopic
+  makefile
+  mdStarter.html
+  mdStarter.md
+  rstStarter.html
+  rstStarter.rst
+  sitemap.html
+
 
   $ ls -1
   Books
@@ -332,11 +338,11 @@ is missing or older than its source rst or md file.
 
   $ find .. -name "*.html" -o -name "catalog.json" |sort
   ../catalog.json
-  ../ExampleWiki/Books/BeejsGuides/beej.us/guide/bggdb/index.html
-  ../ExampleWiki/TopicA/topicA.html
-  ../ExampleWiki/TopicX/mdTopicX.html
-  ../ExampleWiki/TopicX/rstTopicX.html
-  ../ExampleWiki/UnnecessaryNavigationFile.html
+  ../ExampleTopic/Books/BeejsGuides/beej.us/guide/bggdb/index.html
+  ../ExampleTopic/TopicA/topicA.html
+  ../ExampleTopic/TopicX/mdTopicX.html
+  ../ExampleTopic/TopicX/rstTopicX.html
+  ../ExampleTopic/UnnecessaryNavigationFile.html
   ../mdStarter.html
   ../rstStarter.html
   ../sitemap.html
@@ -356,10 +362,14 @@ and click on files when you get there.
 Directory listings are always up to date,
 and you'll have to fix fewer broken links when you move things around.
 
+My suggestion:
+
 * In your browser, bookmark the top `directory` of your wiki,
+  whatever the value of ``$MWK`` is,
   rather than a page in the top directory.
 
-* Create a directory for each topic, and subdirectories for subtopics.
+* In ``$MWK``, create a directory for each topic,
+  and subdirectories for subtopics.
 
   * Create whatever rst or md source files you need
     in your topic directories.
@@ -369,12 +379,14 @@ and you'll have to fix fewer broken links when you move things around.
     * In my opinion, "the top of my main wiki"
       is not relevant to your topic.
     * But a link to another page within the topic may be useful.
+  * Copy in any external files that you need:
+    html, pdf, media files, images, etc.
 
 * Click down through the topic directories and pages as needed.
 
 ``mwk`` generates a sitemap,
 at ``$MWK/sitemap.html``.
-All files in the wiki are listed and clickable.
+All files and directories in the wiki are listed and clickable.
 
 For moving up and down from where you happen to be,
 here's where the Firefox Uppity addon,
@@ -384,9 +396,9 @@ Drill down to a page somewhere down in your wiki.
 Now decide to go to the top of the wiki
 (or anywhere in between, if you like).
 
-I'll go to a page in ``TopicA``.
+I'll go to a page in ``ExampleTopic/TopicA``.
 There's no purely navigational link on the page,
-and specifically no link to the top.
+and specifically no link to the top of the wiki.
 
 You could repeatedly click the back button,
 and depending on the route you took to get to this file,
@@ -422,19 +434,19 @@ when linking to html files that are generated from rst or md files,
 
 ::
 
-  ``file:///home/aaron/MyMiki/ExampleWiki/TopicA/topicA.html``
+  ``file:///home/aaron/MyMiki/ExampleTopic/TopicA/topicA.html``
 
 should instead be written as
 
 ::
 
-  ``$MWK/ExampleWiki/TopicA/topicA.rst``.
+  ``$MWK/ExampleTopic/TopicA/topicA.rst``.
 
 or
 
 ::
 
-  ``$MWK/ExampleWiki/TopicA/topicA.md``.
+  ``$MWK/ExampleTopic/TopicA/topicA.md``.
 
 depending on whether the generated html file
 is based on an rst or md source file.
@@ -462,17 +474,17 @@ and will happily open the rst or md file.
   # Link to one of your rst source files.
   # This will be turned into an html link in the generated html file.
   #
-  `Topic A <$MWK/ExampleWiki/TopicA/topicA.rst>`__
+  `Topic A <$MWK/ExampleTopic/TopicA/topicA.rst>`__
   (that's two underscores at the end)
 
   # Link to a pdf file that you've copied in.
   #
-  `Some pdf <$MWK/ExampleWiki/TopicA/somePdf.pdf>`__
+  `Some pdf <$MWK/ExampleTopic/TopicA/somePdf.pdf>`__
 
   # Link to an html file that you've copied in.
   #
   `html file that you copied in, not based on an rst file
-  <$MWK/ExampleWiki/TopicA/copiedExternal.html>`__
+  <$MWK/ExampleTopic/TopicA/copiedExternal.html>`__
 
   `External web page <https://en.wikipedia.org/wiki/Main_Page>`__
 
@@ -481,7 +493,7 @@ and will happily open the rst or md file.
 
 ::
 
-  `Topic M <$MWK/ExampleWiki/TopicM/topicM.md>`__
+  `Topic M <$MWK/ExampleTopic/TopicM/topicM.md>`__
   (We're in an rst file, so we write rst style links.)
 
 * In your md files,
@@ -492,15 +504,15 @@ and will happily open the rst or md file.
   # Link to one of your md source files.
   # This will be turned into an html link in the generated html file.
   #
-  [Topic Z]($MWK/ExampleWiki/TopicZ/topicZ.md>)
+  [Topic Z]($MWK/ExampleTopic/TopicZ/topicZ.md>)
 
   # Link to a pdf file that you've copied in.
   #
-  [Some pdf]($MWK/ExampleWiki/TopicZ/topicZ.pdf>)
+  [Some pdf]($MWK/ExampleTopic/TopicZ/topicZ.pdf>)
 
   # Link to an html file that you've copied in.
   #
-  [html file that you copied in, not based on an md file]($MWK/ExampleWiki/TopicZ/copiedExternal.html>)
+  [html file that you copied in, not based on an md file]($MWK/ExampleTopic/TopicZ/copiedExternal.html>)
 
   [External web page](https://en.wikipedia.org/wiki/Main_Page)
 
@@ -508,7 +520,7 @@ and will happily open the rst or md file.
 
 ::
 
-  [Topic T]($MWK/ExampleWiki/TopicT/topicT.rst>)
+  [Topic T]($MWK/ExampleTopic/TopicT/topicT.rst>)
   (We're in an md file, so we write md style links.)
 
 Still not clear?
@@ -592,12 +604,15 @@ directory; scatter them throughout your wiki if you like.
 
 ::
 
-  $cd $MWK/ExampleWiki
+  $cd $MWK/ExampleTopic
   
-  $ tree -L 2 -F Books 
+  $ tree -F Books
   Books
   ├── BeejsGuides/
   │   ├── beej.us/
+  │   │   └── guide/
+  │   │       └── bggdb/
+  │   │           └── index.html
   │   ├── bgc_USLetter.pdf
   │   ├── bgipc_USLetter.pdf
   │   ├── bgnet_USLetter.pdf
@@ -612,7 +627,8 @@ directory; scatter them throughout your wiki if you like.
   │   └── ten-steps-to-linux-survival.pdf
   └── Wilhelm/
       ├── meta.json
-      └── WilhelmScream.mp3
+          └── WilhelmScream.mp3
+
 
 I don't use category directories, like, say, `Books/Science/`,
 with all science book directories under there;
@@ -640,10 +656,10 @@ Here's ``Wilhelm/meta.json``:
       "subtitle": "Audio sample",
       "categoryPrimary": "Civilization",
       "categorySecondary": "Audio",
-      "link": "$MWK/ExampleWiki/Books/Wilhelm/WilhelmScream.mp3",
+      "link": "$MWK/ExampleTopic/Books/Wilhelm/WilhelmScream.mp3",
       "source": "https://archive.org/details/WilhelmScreamSample",
       "note": "Creative Commons, Public Domain",
-      "meta": "$MWK/ExampleWiki/Books/Wilhelm/meta.json"
+      "meta": "$MWK/ExampleTopic/Books/Wilhelm/meta.json"
   }
 
 The only fields that ``mwk catalog`` cares about are:
@@ -673,27 +689,67 @@ Every field in a ``meta.json`` object is optional,
 and you can add new fields.
 The only requirement is that everything inside an object must be valid json.
 
-* Read the ``meta.json`` files included with ``ExampleWiki``
+* Read the ``meta.json`` files included with ``ExampleTopic``
   for ideas on how to document your resources.
 
 ::
 
-  $cd $MWK/ExampleWiki
+  $cd $MWK/ExampleTopic
   
-  $ tree -L 2 -F Books 
+  $ tree -F Books 
   Books
   ├── BeejsGuides/
   │   ├── beej.us/
+  │   │   └── guide/
+  │   │       └── bggdb/
+  │   │           └── index.html
   │   ├── bgc_USLetter.pdf
   │   ├── bgipc_USLetter.pdf
   │   ├── bgnet_USLetter.pdf
   │   └── meta.json
 
 There are four resources in ``BeejsGuides``,
-the three pdfs you see above,
-and an html file down in ``BeejsGuides/beej.us/``.
+the three pdfs and the html that you see above.
 They are all tracked in the single ``meta.json`` file,
 with four json objects.
+
+::
+
+  $ cat Books/BeejsGuides/meta.json
+  {
+      "title": "Beej's Quick Guide to GDB",
+      "categoryPrimary": "Software",
+      "categorySecondary": "C",
+      "link": "$MWK/ExampleTopic/Books/BeejsGuides/beej.us/guide/bggdb/index.html",
+      "source": "http://beej.us/guide/bggdb/",
+      "meta": "$MWK/ExampleTopic/Books/BeejsGuides/meta.json"
+  }
+  {
+      "title": "Beej's Guide to C Programming",
+      "subtitle": "Rough draft",
+      "categoryPrimary": "Software",
+      "categorySecondary": "C",
+      "link": "$MWK/ExampleTopic/Books/BeejsGuides/bgc_USLetter.pdf",
+      "source": "http://beej.us/guide/bgc/",
+      "meta": "$MWK/ExampleTopic/Books/BeejsGuides/meta.json"
+  }
+  {
+      "title": "Beej's Guide to Unix IPC",
+      "categoryPrimary": "Software",
+      "categorySecondary": "C",
+      "link": "$MWK/ExampleTopic/Books/BeejsGuides/bgipc_USLetter.pdf",
+      "source": "http://beej.us/guide/bgipc/",
+      "meta": "$MWK/ExampleTopic/Books/BeejsGuides/meta.json"
+  }
+  {
+      "title": "Beej's Guide to Network Programming",
+      "subtitle": "Using Internet Sockets",
+      "categoryPrimary": "Software",
+      "categorySecondary": "C",
+      "link": "$MWK/ExampleTopic/Books/BeejsGuides/bgnet_USLetter.pdf",
+      "source": "http://beej.us/guide/bgnet/",
+      "meta": "$MWK/ExampleTopic/Books/BeejsGuides/meta.json"
+  }
 
 Note that the four top-level json objects in ``meta.json``
 are `not` separated by commas.
