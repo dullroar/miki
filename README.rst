@@ -282,6 +282,12 @@ then run it from its directory.
   
   All tests PASS
 
+.. figure:: testMWKOutput.png
+   :width: 100 %
+   :target: testMWKOutput.png
+   :alt: Side by side test script and output
+
+   Side by side test script and output
 
 
 How To

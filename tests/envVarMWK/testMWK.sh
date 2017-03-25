@@ -51,7 +51,6 @@ set -o errexit
 goodTest=0
 badArgs=2
 badTest=9
-backupMWK=$MWK
 
 testFailed () {
     if [ $# -ne 2 ]
