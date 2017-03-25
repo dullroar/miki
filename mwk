@@ -1,3 +1,15 @@
 #! /usr/bin/env bash
 
-make -f $MWK/makefile $*
+# Run $MWK/makefile, passing any arguments through.
+# https://github.com/a3n/miki
+
+set -o errexit # Exit with error: any error.
+set -o nounset # Exit with error: an unset env variable is used.
+
+[ -d "$MWK" ] || (
+    echo "$0: Required: export MWK=~/top/directory/of/your/wiki"
+    echo "\$MWK = \"$MWK\""
+    exit 1
+)
+
+make -f "$MWK/makefile" $*

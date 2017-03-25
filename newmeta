@@ -1,5 +1,19 @@
 #! /usr/bin/env bash
 
+# Create a usable starter meta.json,
+# with a link to the tracked file,
+# and a link to the resulting meta.json.
+# https://github.com/a3n/miki
+
+set -o errexit # Exit with error: any error.
+set -o nounset # Exit with error: an unset env variable is used.
+
+[ -d "$MWK" ] || (
+    echo "$0: Required: export MWK=~/top/directory/of/your/wiki"
+    echo "\$MWK = \"$MWK\""
+    exit 1
+)
+
 # Don't overwrite existing meta.json.
 [ -e meta.json ] && echo "ERROR: meta.json already exists." && exit 1
 

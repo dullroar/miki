@@ -1,10 +1,20 @@
+# From .rst or .md files, generate respective .html, .txt, .pdf
+# From all meta.json, generate one $MWK/catalog.json
+# From all files, generate one $MWK/sitemap.html
+# https://github.com/a3n/miki                                               
 
-# From .rst or .md, generate .html, .txt, .pdf
-# From all meta.json, generate one catalog.json
+# Check if MWK is set.
+mwk_stripped := $(strip $(MWK))
+ifeq ($(mwk_stripped),)
+$(error You must set environment variable MWK \
+to the top directory of your wiki, MWK is blank or unset)
+endif
 
-ifeq ($(MWK),)
-  $(error You must set environment variable MWK\
- to the top directory of your wiki)
+# Check if MWK is a directory.
+mwk_dir := $(shell find "$(MWK)" -type d -wholename "$(MWK)")
+ifneq ($(MWK),$(mwk_dir))
+$(error You must set environment variable MWK \
+to the top directory of your wiki, MWK = $(MWK))
 endif
 
 ##########################

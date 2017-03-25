@@ -241,6 +241,49 @@ Check the Installation
   /usr/bin/latex
   /usr/bin/pdftex
 
+Test files
+..........
+
+There are now tests to check proper ``$MWK`` setting, in the repo.
+They are meant for anyone developing or maintaining Miki,
+but an end user could run them if they wanted.
+
+There may be more tests in the future. Testing is good.
+
+``testMWK.sh`` should run to completion,
+with a message that all tests passed.
+If any test failed, the reason why is printed,
+and the script stops there.
+
+Instructions on how to run are in the file,
+but basically install Miki and make the test script executable,
+then run it from its directory.
+
+::
+
+  $ cd <repoClone>/tests/envVarMWK
+  $ chmod ug+x testMWK.sh
+  $ ./testMWK.sh
+
+  Test mwk happy paths.
+  
+  + which mwk
+  /home/aaron/bin/mwk
+  OK
+
+  ...
+
+  + export MWK=/home/aaron/MWK/makefile
+  + MWK=/home/aaron/MWK/makefile
+  + newmeta .
+  /home/aaron/bin/newmeta: Required: export MWK=~/top/directory/of/your/wiki
+  $MWK = "/home/aaron/MWK/makefile"
+  OK
+  
+  All tests PASS
+
+
+
 How To
 ======
 
