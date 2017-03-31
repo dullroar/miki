@@ -515,71 +515,10 @@ and you'll be able to move your wiki to another directory or machine
 without link breakage. Vim understands the environment variable,
 and will happily open the rst or md file.
 
-* In your rst files,
-  write your links to other wiki pages/files like this:
+More complete descriptions of writing links are found in:
 
-::
-
-  # Link to one of your rst source files.
-  # This will be turned into an html link in the generated html file.
-  #
-  `Topic A <$MWK/ExampleTopic/TopicA/topicA.rst>`__
-  (that's two underscores at the end)
-
-  # Link to a pdf file that you've copied in.
-  #
-  `Some pdf <$MWK/ExampleTopic/TopicA/somePdf.pdf>`__
-
-  # Link to an html file that you've copied in.
-  #
-  `html file that you copied in, not based on an rst file
-  <$MWK/ExampleTopic/TopicA/copiedExternal.html>`__
-
-  `External web page <https://en.wikipedia.org/wiki/Main_Page>`__
-
-
-* You can also link to md files from an rst file:
-
-::
-
-  `Topic M <$MWK/ExampleTopic/TopicM/topicM.md>`__
-  (We're in an rst file, so we write rst style links.)
-
-* In your md files,
-  write your links to other wiki pages/files like this:
-
-::
-
-  # Link to one of your md source files.
-  # This will be turned into an html link in the generated html file.
-  #
-  [Topic Z]($MWK/ExampleTopic/TopicZ/topicZ.md>)
-
-  # Link to a pdf file that you've copied in.
-  #
-  [Some pdf]($MWK/ExampleTopic/TopicZ/topicZ.pdf>)
-
-  # Link to an html file that you've copied in.
-  #
-  [html file that you copied in, not based on an md file]($MWK/ExampleTopic/TopicZ/copiedExternal.html>)
-
-  [External web page](https://en.wikipedia.org/wiki/Main_Page)
-
-* You can also link to rst files from an md file:
-
-::
-
-  [Topic T]($MWK/ExampleTopic/TopicT/topicT.rst>)
-  (We're in an md file, so we write md style links.)
-
-Still not clear?
-Run ``mwk``, then compare a ``.rst`` file
-with its generated ``.html`` file,
-and see how ``$MWK`` and ``.rst`` in the rst file
-get changed to proper links in the html file.
-
-Do the same comparison between a ``.md`` file
-and its generated ``.html`` file.
+* $MWK/mdStarter.md and its output files: .html, .pdf, .txt.
+* $MWK/rstStarter.rst and its output files: .html, .pdf, .txt.
 
 Catalog
 -------

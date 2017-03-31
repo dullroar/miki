@@ -1,6 +1,9 @@
-# From .rst or .md files, generate respective .html, .txt, .pdf
-# From all meta.json, generate one $MWK/catalog.json
-# From all files, generate one $MWK/sitemap.html
+# From source markup files (.rst, .md),
+# generate output files (.html, .txt, .pdf).
+#
+# From all meta.json, generate one $MWK/catalog.json.
+# From all files, generate one $MWK/sitemap.html.
+#
 # https://github.com/a3n/miki                                               
 
 # Check if MWK is set.
@@ -25,6 +28,7 @@ META := $(shell find $(MWK) -type f -name "meta.json")
 CATA := $(MWK)/catalog.json
 SITE := $(MWK)/sitemap.html
 
+# reStructuredText
 # Find all .rst files at $MWK and below.
 # Create corresponding target lists for .html, .txt, .pdf.
 RST := $(shell find $(MWK) -type f -name "*.rst")
@@ -32,6 +36,7 @@ RHTML := $(RST:.rst=.html)
 RTEXT := $(RST:.rst=.txt)
 RPDF := $(RST:.rst=.pdf)
 
+# Markdown
 # Find all .md files at $MWK and below.
 # Create corresponding target lists for .html, .txt, .pdf.
 MD := $(shell find $(MWK) -type f -name "*.md")
@@ -39,9 +44,9 @@ MHTML := $(MD:.md=.html)
 MTEXT := $(MD:.md=.txt)
 MPDF := $(MD:.md=.pdf)
 
-HTML := $(RHTML) $(MHTML) $(CATA) $(SITE)
-TEXT := $(RTEXT) $(MTEXT)
-PDF := $(RPDF) $(MPDF)
+HTML := $(RHTML) $(MHTML) $(AHTML) $(CATA) $(SITE)
+TEXT := $(RTEXT) $(MTEXT) $(ATEXT)
+PDF := $(RPDF) $(MPDF) $(APDF)
 
 ALL := $(sort $(HTML) $(TEXT) $(PDF))
 ALL_SOURCE := $(sort $(RST) $(MD))
@@ -49,22 +54,16 @@ ALL_SOURCE := $(sort $(RST) $(MD))
 #####################
 ### Target rules. ###
 
-# Generate .html files from all .rst and .md files.
 html: $(HTML)
 
-# Generate plain .txt files from all .rst and .md files.
 text: $(TEXT)
 
-# Generate PDF files from all .rst and .md files.
 pdf: $(PDF)
 
-# Generate all the things.
 all: $(ALL)
 
-# Generate a catalog of all meta.json files.
 catalog: $(CATA)
 
-# Generate sitemap
 sitemap: $(SITE)
 
 # Clean all the things!
@@ -79,11 +78,10 @@ print:
 	@echo "All targets:"
 	@echo $(ALL) |tr " " "\n"
 
-# goodlinks and badlinks only differ on their second lines:
-# "&&" vs "||"
 goodlinks: $(HTML)
 	@ echo
 	# Any local links found in files, and the links exist in $(MWK)
+	#
 	@for lk in $$(grep -onE 'href="[^"]*"' $$(find $$MWK -type f) |grep "href=\"/home") ; do \
 	    f=$$(echo $$lk |cut -d ":" -f 3) ; \
 	    f=$$(echo $$f |cut -d "\"" -f 2) ; \
@@ -95,6 +93,7 @@ badlinks: $(HTML)
 	# Any local links found in files, and the links DO NOT EXIST in $(MWK)
 	# From the file on the left of ':', determine the source file,
 	# and fix the link.
+	#
 	@for lk in $$(grep -onE 'href="[^"]*"' $$(find $$MWK -type f) |grep "href=\"/home") ; do \
 	    f=$$(echo $$lk |cut -d ":" -f 3) ; \
 	    f=$$(echo $$f |cut -d "\"" -f 2) ; \
@@ -105,72 +104,93 @@ badlinks: $(HTML)
 #############################
 ### File generation rules ###
 
-# - Expand $(MWK).
-# - Change .rst and .md to .html.
-# - Then run rst2html.
+# The following "MWK_TO..." make variables:
+# - Change any "$MWK...markupSuffix"
+#   to "file://MWKexpansion...outputSuffix"
+# - Expand any lone $MWK instances.
+# - Remove any ascii null characters found.
+
+MWK_TO_HTML_SED = ' {\
+s|$$MWK\(.*\)\.md|file://$(MWK)\1.html|g ; \
+s|$$MWK\(.*\)\.rst|file://$(MWK)\1.html|g ; \
+s|$$MWK|$(MWK)|g ; \
+s|\x00||g } '
+
+MWK_TO_PDF_SED = ' {\
+s|$$MWK\(.*\)\.md|file://$(MWK)\1.pdf|g ; \
+s|$$MWK\(.*\)\.rst|file://$(MWK)\1.pdf|g ; \
+s|$$MWK|$(MWK)|g ; \
+s|\x00||g } '
+
+MWK_TO_TXT_SED = ' {\
+s|$$MWK\(.*\)\.md|file://$(MWK)\1.txt|g ; \
+s|$$MWK\(.*\)\.rst|file://$(MWK)\1.txt|g ; \
+s|$$MWK|$(MWK)|g ; \
+s|\x00||g } '
+
 %.html: %.rst
 	@ echo
 	# $< to $@
 	#
-	sed -e "s|<\x24MWK/|<$(MWK)/|" \
-	    -e "s|\.rst>\`_|.html>\`_|" \
-	    -e "s|\.md>\`_|.html>\`_|" \
-	    -e "s|\x24MWK|file://$(MWK)|" \
-	$< |rst2html --tab-width=4 > $@
+	sed $(MWK_TO_HTML_SED) $< \
+	|rst2html --tab-width=4 > $@
 
 %.pdf: %.rst
 	@ echo
-	@# ">/dev/null" because rst2pdf is really chatty.
 	# $< to $@
 	#
-	sed -e "s|<\x24MWK/|<$(MWK)/|" \
-	    -e "s|\.rst>\`_|.html>\`_|" \
-	    -e "s|\.md>\`_|.html>\`_|" \
-	    -e "s|\x24MWK|file://$(MWK)|" \
-	$< |rst2pdf -o $@ >/dev/null
+	sed $(MWK_TO_PDF_SED) $< \
+	|rst2pdf -o $@ >/dev/null
 
-# - Expand $(MWK).
-# - Change .rst and .md to .html.
-# - Then run markdown.
+%.txt: %.rst
+	@ echo
+	# $< to $@
+	#
+	sed $(MWK_TO_TXT_SED) $< \
+	|rst2html --tab-width=4 > $@
+	lynx -dump -force_html $@ > $@.txt
+	rm -f $@; mv $@.txt $@
+
 %.html: %.md
 	@ echo
 	# $< to $@
 	#
-	sed -e "s|\]\x28\x24MWK/|\]\x28$(MWK)/|" \
-	    -e "s|\.md\x29|.html\x29|" \
-	    -e "s|\.rst\x29|.html\x29|" \
-	    -e "s|\x24MWK|file://$(MWK)|" \
-	$< |pandoc -s --toc -f markdown -t html -o $@
+	sed $(MWK_TO_HTML_SED) $< \
+	|pandoc -s --toc -f markdown -t html -o $@
 
 %.pdf: %.md
 	@ echo
 	# $< to $@
 	#
-	sed -e "s|\]\x28\x24MWK/|\]\x28$(MWK)/|" \
-	    -e "s|\.md\x29|.html\x29|" \
-	    -e "s|\.rst\x29|.html\x29|" \
-	    -e "s|\x24MWK|file://$(MWK)|" \
-	$< |pandoc -s --toc -V geometry:margin=1in -o $@
+	sed $(MWK_TO_PDF_SED) $< \
+	|pandoc -s --toc -V geometry:margin=1in -o $@
 
-%.txt: %.html
+%.txt: %.md
 	@ echo
 	# $< to $@
 	#
-	lynx -dump $< > $@
+	sed $(MWK_TO_TXT_SED) $< \
+	|pandoc -s --toc -f markdown -t html -o $@
+	lynx -dump -force_html $@ > $@.txt
+	rm -f $@; mv $@.txt $@
 
+# Generate the media catalog.
+#
 $(CATA): $(META)
 	@ echo
-	# All meta.json to $@
+	# Catalog: All meta.json to $@
 	#
 	cat $(META) |sed -e "s|\x24MWK|file://$(MWK)|" |jq --slurp '.' > $(CATA)
 
 	@ echo
-	# Sort and group json objects in $@
+	# Catalog: Sort and group json objects in $@
 	#
 	cat $(CATA) |jq \
 	  'sort_by(.title) |group_by(.categoryPrimary, .categorySecondary)' \
 	  > $(CATA).tmp && mv $(CATA).tmp $(CATA)
 
+# Generate the sitemap.
+#
 $(SITE):
 	@echo
 	# Generate sitemap.
