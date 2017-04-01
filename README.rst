@@ -9,15 +9,26 @@ Minimal makefile-based personal wiki
     :description: https://github.com/a3n/miki
 	 Miki: minimal makefile-based personal wiki.
 
-* Write wiki pages in `reStructuredText
-  <https://en.wikipedia.org/wiki/ReStructuredText>`__ (rst)
-  or `Markdown
-  <https://en.wikipedia.org/wiki/Markdown>`__ (md).
-  Both types can be in the same wiki.
-* Run ``make`` to output html, and/or pdf, and/or plain text.
+* Write wiki pages in your preferred markup language.
+  All supported types can be in the same wiki.
+  
+  * `AsciiDoc
+    <https://en.wikipedia.org/wiki/AsciiDoc>`__ (adoc)
+  * `Markdown
+    <https://en.wikipedia.org/wiki/Markdown>`__ (md)
+  * `reStructuredText
+    <https://en.wikipedia.org/wiki/ReStructuredText>`__ (rst)
 
-  * Also generates a sitemap for the whole wiki.
-  * Optionally catalogs any book/media files in your wiki.
+* Run ``make`` to output some or all of:
+  
+  * html
+  * pdf
+  * plain text
+
+* Also generates:
+
+  * A sitemap for the whole wiki.
+  * A catalog of any book/media files in your wiki.
 
 * Read your wiki pages.
 
@@ -93,10 +104,14 @@ Prerequisites
 * lynx, for html to text generation.
 * jq, for ``meta.json`` to ``catalog.json`` generation.
 * tree, for generating the sitemap.
-* reStructuredText-specific.
 
-  * docutils, for rst2html.
-  * rst2pdf, for rst2pdf.
+* AsciiDoc-specific:
+
+  * asciidoc, for asciidoc to html generation.
+
+    * asciidoc package includes a2x.
+
+  * dblatex, with a2x, for asciidoc to pdf generation.
 
 * Markdown-specific.
 
@@ -108,6 +123,12 @@ Prerequisites
     * texlive-latex-extra.
     * lmodern.
 
+* reStructuredText-specific.
+
+  * docutils, for rst2html.
+  * rst2pdf, for rst2pdf.
+
+
 Installation
 ------------
 
@@ -117,6 +138,7 @@ Installation
   * ``makefile``
   * ``mwk``
   * ``newmeta``
+  * ``adocStarter.adoc``
   * ``rstStarter.rst``
   * ``mdStarter.md``
 
@@ -156,12 +178,19 @@ Installation
   $ chmod ug+x mwk newmeta # Make them executable.
 
 * Copy ``ExampleTopic``, the ``makefile``,
-  and two starter files, to your wiki.
+  and three starter files, to your wiki.
+
+  * The three starter files are each an example
+    of the three markup languages supported.
+  * You can read them for details of how to write links
+    (I recommend running ``mwk``, so you can read the orignal
+    markup files and compare them to their html output.)
+  * You can copy them to new files to get started ("starter").
 
 ::
 
   $ cd /place/where/you/downloaded/or/cloned/the/files
-  $ cp -r ExampleTopic makefile mdStarter.md rstStarter.rst $MWK/.
+  $ cp -r ExampleTopic makefile adocStarter.adoc mdStarter.md rstStarter.rst $MWK/.
 
 * NOTE: ExampleTopic is for demo/test.
 
@@ -182,46 +211,47 @@ Check the Installation
   /home/aaron/bin/mwk
   /home/aaron/bin/newmeta
 
-  $ ls -1 $MWK
-  ExampleTopic
-  makefile
-  mdStarter.md
-  rstStarter.rst
-
   # NOTE: The pdf and other resource files under Books are empty
   # placeholder files; I'm not distributing other peoples' files.
-  #
-  $ cd $MWK
-  $ tree ExampleTopic
-  ExampleTopic
-  ├── Books
-  │   ├── BeejsGuides
-  │   │   ├── beej.us
-  │   │   │   └── guide
-  │   │   │       └── bggdb
-  │   │   │           └── index.html
-  │   │   ├── bgc_USLetter.pdf
-  │   │   ├── bgipc_USLetter.pdf
-  │   │   ├── bgnet_USLetter.pdf
-  │   │   └── meta.json
-  │   ├── DailyAffirmation
-  │   │   └── meta.json
-  │   ├── DeepCSecrets
-  │   │   ├── Linden_-_Expert_C_Programming__Deep_C_Secrets.pdf
-  │   │   └── meta.json
-  │   ├── TenStepsToLinuxSurvival
-  │   │   ├── meta.json
-  │   │   └── ten-steps-to-linux-survival.pdf
-  │   └── Wilhelm
-  │       ├── meta.json
-  │       └── WilhelmScream.mp3
-  ├── TopicA
-  │   └── topicA.rst
-  ├── TopicX
-  │   ├── mdTopicX.md
-  │   └── rstTopicX.rst
-  └── UnnecessaryNavigationFile.rst
 
+  $ cd $MWK
+
+  $ tree 
+  .
+  ├── adocStarter.adoc
+  ├── ExampleTopic
+  │   ├── Books
+  │   │   ├── BeejsGuides
+  │   │   │   ├── beej.us
+  │   │   │   │   └── guide
+  │   │   │   │       └── bggdb
+  │   │   │   │           └── index.html
+  │   │   │   ├── bgc_USLetter.pdf
+  │   │   │   ├── bgipc_USLetter.pdf
+  │   │   │   ├── bgnet_USLetter.pdf
+  │   │   │   └── meta.json
+  │   │   ├── DailyAffirmation
+  │   │   │   └── meta.json
+  │   │   ├── DeepCSecrets
+  │   │   │   ├── Linden_-_Expert_C_Programming__Deep_C_Secrets.pdf
+  │   │   │   └── meta.json
+  │   │   ├── TenStepsToLinuxSurvival
+  │   │   │   ├── meta.json
+  │   │   │   └── ten-steps-to-linux-survival.pdf
+  │   │   └── Wilhelm
+  │   │       ├── meta.json
+  │   │       └── WilhelmScream.mp3
+  │   ├── TopicA
+  │   │   └── topicA.rst
+  │   ├── TopicX
+  │   │   ├── mdTopicX.md
+  │   │   └── rstTopicX.rst
+  │   └── UnnecessaryNavigationFile.rst
+  ├── makefile
+  ├── mdStarter.md
+  └── rstStarter.rst
+
+  12 directories, 20 files
 
   $ make --version
   GNU Make 4.1 # Any recent version is fine, but it should be Gnu.
@@ -241,54 +271,10 @@ Check the Installation
   /usr/bin/latex
   /usr/bin/pdftex
 
-Test files
-..........
-
-There are now tests to check proper ``$MWK`` setting, in the repo.
-They are meant for anyone developing or maintaining Miki,
-but an end user could run them if they wanted.
-
-There may be more tests in the future. Testing is good.
-
-``testMWK.sh`` should run to completion,
-with a message that all tests passed.
-If any test failed, the reason why is printed,
-and the script stops there.
-
-Instructions on how to run are in the file,
-but basically install Miki and make the test script executable,
-then run it from its directory.
-
-::
-
-  $ cd <repoClone>/tests/envVarMWK
-  $ chmod ug+x testMWK.sh
-  $ ./testMWK.sh
-
-  Test mwk happy paths.
-  
-  + which mwk
-  /home/aaron/bin/mwk
-  OK
-
-  ...
-
-  + export MWK=/home/aaron/MWK/makefile
-  + MWK=/home/aaron/MWK/makefile
-  + newmeta .
-  /home/aaron/bin/newmeta: Required: export MWK=~/top/directory/of/your/wiki
-  $MWK = "/home/aaron/MWK/makefile"
-  OK
-  
-  All tests PASS
-
-.. figure:: testMWKOutput.png
-   :width: 100 %
-   :target: testMWKOutput.png
-   :alt: Side by side test script and output
-
-   Side by side test script and output
-
+  $ which asciidoc a2x dblatex
+  /usr/bin/asciidoc
+  /usr/bin/a2x
+  /usr/bin/dblatex
 
 How To
 ======
@@ -339,62 +325,55 @@ is missing or older than its source rst or md file.
   # even outside the wiki, and the files will be generated
   # in their proper places.
   #
-  # For the moment, we care about what happens in ExampleTopic,
-  # so we'll go there.
+  # For the moment, we'll generate from within the top of the wiki.
   #
-  $ cd $MWK/ExampleTopic
+  $ cd $MWK
 
   $ mwk clean # Just to be sure we're both starting from zero.
   cleaned
 
-  $ ls -1
-  Books
-  TopicA
-  TopicX
-  UnnecessaryNavigationFile.rst
+  $ tree -L 2 
+  .
+  ├── adocStarter.adoc
+  ├── ExampleTopic
+  │   ├── Books
+  │   ├── TopicA
+  │   ├── TopicX
+  │   └── UnnecessaryNavigationFile.rst
+  ├── makefile
+  ├── mdStarter.md
+  └── rstStarter.rst
+
+  4 directories, 5 files
 
   $ mwk
   ... make output ..
 
-  $ ls -1 ..
-  catalog.json
-  ExampleTopic
-  makefile
-  mdStarter.html
-  mdStarter.md
-  rstStarter.html
-  rstStarter.rst
-  sitemap.html
+  $ tree -L 2
+  .
+  ├── adocStarter.adoc
+  ├── adocStarter.html
+  ├── catalog.json
+  ├── ExampleTopic
+  │   ├── Books
+  │   ├── TopicA
+  │   ├── TopicX
+  │   ├── UnnecessaryNavigationFile.html
+  │   └── UnnecessaryNavigationFile.rst
+  ├── makefile
+  ├── mdStarter.html
+  ├── mdStarter.md
+  ├── rstStarter.html
+  ├── rstStarter.rst
+  └── sitemap.html
 
-
-  $ ls -1
-  Books
-  TopicA
-  TopicX
-  UnnecessaryNavigationFile.html
-  UnnecessaryNavigationFile.rst
+  4 directories, 11 files
 
 * New files: 
 
   * ``catalog.json`` at the top of the wiki.
   * ``sitemap.html`` at the top of the wiki.
-  * New html files wherever an rst or md file is found.
-
-    * (The ``index.html`` file below was already there,
-      it's not based on an rst or md file.)
-
-::
-
-  $ find .. -name "*.html" -o -name "catalog.json" |sort
-  ../catalog.json
-  ../ExampleTopic/Books/BeejsGuides/beej.us/guide/bggdb/index.html
-  ../ExampleTopic/TopicA/topicA.html
-  ../ExampleTopic/TopicX/mdTopicX.html
-  ../ExampleTopic/TopicX/rstTopicX.html
-  ../ExampleTopic/UnnecessaryNavigationFile.html
-  ../mdStarter.html
-  ../rstStarter.html
-  ../sitemap.html
+  * New html files wherever an adoc, rst or md file is found.
 
 Read and navigate Miki
 ----------------------
@@ -478,45 +457,59 @@ Uppity will immediately move you up one URL level.
 Write links in your rst and md source files
 -------------------------------------------
 
-In your rst and md source files,
-when linking to html files that are generated from rst or md files,
+In your markup source files,
+when linking to other files that are generated from markup source files:
 
 ::
 
-  ``file:///home/aaron/MyMiki/ExampleTopic/TopicA/topicA.html``
+  file:///home/aaron/MyMiki/ExampleTopic/TopicA/topicA.html
 
-should instead be written as
-
-::
-
-  ``$MWK/ExampleTopic/TopicA/topicA.rst``.
-
-or
+should instead be written as ...
 
 ::
 
-  ``$MWK/ExampleTopic/TopicA/topicA.md``.
+  $MWK/ExampleTopic/TopicA/atopicA.adoc
+  $MWK/ExampleTopic/TopicA/mtopicA.md
+  $MWK/ExampleTopic/TopicA/rtopicA.rst
 
-depending on whether the generated html file
-is based on an rst or md source file.
+... depending on what you're linking to.
 
-``mwk`` will translate these to full and proper ``.html`` links
-in the generated html files.
+``mwk`` will translate these to full and proper links.
 
-You write links to generated files with ``.md`` or ``.rst`` endings
-so that you can jump from source file to source file in your text editor.
-In Vim, for example, put the cursor on a file name, then ``gf``
-will open that file in Vim. You probably want to go to the rst or md file,
-not the generated html or pdf file.
+Example: Say we're writing an rst file, ``myRst.rst``,
+and in that file we want a link to the ``.adoc`` file above.
 
-You replace ``file:///path/to/my/wiki`` with ``$MWK``
-because it's easier to write,
-and you'll be able to move your wiki to another directory or machine
-without link breakage. Vim understands the environment variable,
-and will happily open the rst or md file.
+And now we run ``mwk all``, to generate html, pdf and txt files
+for every source markup file, including for ``myRst.rst``.
+
+The link in the generated ``myRst.html`` will be to ``atopicA.html``.
+Because in an html file,
+you probably want to navigate to another html file.
+
+In the generated ``myRst.pdf``,
+the link in that same line will be to ``atopicA.pdf``.
+
+In the generated ``myRst.txt``,
+the link in that same line will be to ``atopicA.txt``.
+
+Three different file types (html, pdf, txt)
+generated from one source markup file (rst).
+
+In each of the three output files,
+the type of link appropriate for that file is generated.
+
+While writing myRst.rst in your nice editor (Vim, Emacs, etc),
+if you place your cursor on 
+``$MWK/ExampleTopic/TopicA/atopicA.adoc``,
+then in Vim for example, you can type ``gf`` for "get file" (or "go file?")
+and the editor will open that markup file.
+
+In essence, you can navigate from source to source, like a wiki,
+while you're maintaining your wiki files.
 
 More complete descriptions of writing links are found in:
 
+* $MWK/adocStarter.adoc and its output files: .html, .pdf, .txt.
 * $MWK/mdStarter.md and its output files: .html, .pdf, .txt.
 * $MWK/rstStarter.rst and its output files: .html, .pdf, .txt.
 

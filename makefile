@@ -1,4 +1,4 @@
-# From source markup files (.rst, .md),
+# From source markup files (.rst, .md, .adoc),
 # generate output files (.html, .txt, .pdf).
 #
 # From all meta.json, generate one $MWK/catalog.json.
@@ -44,12 +44,20 @@ MHTML := $(MD:.md=.html)
 MTEXT := $(MD:.md=.txt)
 MPDF := $(MD:.md=.pdf)
 
+# AsciiDoc
+# Find all .adoc files at $MWK and below.
+# Create corresponding target lists for .html, .txt, .pdf.
+ADOC := $(shell find $(MWK) -type f -name "*.adoc")
+AHTML := $(ADOC:.adoc=.html)
+ATEXT := $(ADOC:.adoc=.txt)
+APDF := $(ADOC:.adoc=.pdf)
+
 HTML := $(RHTML) $(MHTML) $(AHTML) $(CATA) $(SITE)
 TEXT := $(RTEXT) $(MTEXT) $(ATEXT)
 PDF := $(RPDF) $(MPDF) $(APDF)
 
 ALL := $(sort $(HTML) $(TEXT) $(PDF))
-ALL_SOURCE := $(sort $(RST) $(MD))
+ALL_SOURCE := $(sort $(RST) $(MD) $(ADOC))
 
 #####################
 ### Target rules. ###
@@ -111,18 +119,21 @@ badlinks: $(HTML)
 # - Remove any ascii null characters found.
 
 MWK_TO_HTML_SED = ' {\
+s|$$MWK\(.*\)\.adoc|file://$(MWK)\1.html|g ; \
 s|$$MWK\(.*\)\.md|file://$(MWK)\1.html|g ; \
 s|$$MWK\(.*\)\.rst|file://$(MWK)\1.html|g ; \
 s|$$MWK|$(MWK)|g ; \
 s|\x00||g } '
 
 MWK_TO_PDF_SED = ' {\
+s|$$MWK\(.*\)\.adoc|file://$(MWK)\1.html|g ; \
 s|$$MWK\(.*\)\.md|file://$(MWK)\1.pdf|g ; \
 s|$$MWK\(.*\)\.rst|file://$(MWK)\1.pdf|g ; \
 s|$$MWK|$(MWK)|g ; \
 s|\x00||g } '
 
 MWK_TO_TXT_SED = ' {\
+s|$$MWK\(.*\)\.adoc|file://$(MWK)\1.html|g ; \
 s|$$MWK\(.*\)\.md|file://$(MWK)\1.txt|g ; \
 s|$$MWK\(.*\)\.rst|file://$(MWK)\1.txt|g ; \
 s|$$MWK|$(MWK)|g ; \
@@ -171,6 +182,29 @@ s|\x00||g } '
 	#
 	sed $(MWK_TO_TXT_SED) $< \
 	|pandoc -s --toc -f markdown -t html -o $@
+	lynx -dump -force_html $@ > $@.txt
+	rm -f $@; mv $@.txt $@
+
+%.html: %.adoc
+	@ echo
+	# $< to $@
+	#
+	sed $(MWK_TO_HTML_SED) $< \
+	|asciidoc - > $@
+
+%.pdf: %.adoc
+	@ echo
+	# $< to $@
+	#
+	sed $(MWK_TO_PDF_SED) $< > $@
+	a2x -f pdf $@
+
+%.txt: %.adoc
+	@ echo
+	# $< to $@
+	#
+	sed $(MWK_TO_TXT_SED) $< \
+	|asciidoc - > $@
 	lynx -dump -force_html $@ > $@.txt
 	rm -f $@; mv $@.txt $@
 
