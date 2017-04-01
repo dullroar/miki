@@ -766,3 +766,27 @@ These two ``meta.json`` files each track a single pdf file.
       └── WilhelmScream.mp3
 
 This ``meta.json`` file tracks an mp3 file.
+
+Recent Changes
+==============
+
+`Add AsciiDoc as a supported markup language
+<https://github.com/a3n/miki/issues/6>`__
+
+    AsciiDoc added.
+    
+    Fixed/closed 2017.03.31 in Commit
+    `3aadf8d
+    <https://github.com/a3n/miki/commit/3aadf8d4d17ca3fc8fc313e45f0bd00d7477b742>`__
+
+`Fix/Improve makefile file recipes
+<https://github.com/a3n/miki/issues/5>`__
+
+    Generated pdf and text files had links to html files,
+    rather than pdf and text. Fixed that.
+
+    Refactored makefile in anticipation of adding AsciiDoc.
+
+    Fixed/Closed 2017.03.31 in Commit
+    `cca2452
+    <https://github.com/a3n/miki/commit/cca2452f45dba7983f005d110a53c98fc7a1acaf>`_
