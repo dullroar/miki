@@ -7,11 +7,11 @@ Minimal makefile-based personal wiki
 
 .. meta::
     :description: https://github.com/a3n/miki
-	 Miki: minimal makefile-based personal wiki.
+     Miki: minimal makefile-based personal wiki.
 
 * Write wiki pages in your preferred markup language.
   All supported types can be in the same wiki.
-  
+
   * `AsciiDoc
     <https://en.wikipedia.org/wiki/AsciiDoc>`__ (adoc)
   * `Markdown
@@ -20,13 +20,13 @@ Minimal makefile-based personal wiki
     <https://en.wikipedia.org/wiki/ReStructuredText>`__ (rst)
 
 * Run ``make`` to output some or all of:
-  
+
   * html
   * pdf
   * plain text
 
   * Also generates:
-  
+
     * ``sitemap.html`` for the whole wiki.
     * ``catalog.json`` of any book/media files in your wiki.
 
@@ -144,7 +144,7 @@ Installation
 * Recommended: ``git clone`` this repo, or download its zip and extract.
 
   * Or, very minimally, download these files:
-  
+
     * ``makefile``
     * ``mwk``
     * ``newmeta``
@@ -226,7 +226,7 @@ Check the Installation
 
   $ cd $MWK
 
-  $ tree 
+  $ tree
   .
   ├── adocStarter.adoc
   ├── ExampleTopic
@@ -349,7 +349,7 @@ right away and always.
 Instead:
 
 * Bookmark the top *directory* of your wiki.
-  
+
   * Treat that as your front page.
   * Bookmark whatever else you like, of course.
 
@@ -524,7 +524,7 @@ will create a starter ``meta.json`` file for you:
 ::
 
   $ cd $MWK/anywhere/DirectoryThatHasYourBook
-  
+
   $ newmeta yourbook.pdf
 
   $ cat meta.json
@@ -566,7 +566,7 @@ and the thought is totally contained in the ``meta.json`` file.
 ::
 
   $cd $MWK/ExampleTopic
-  
+
   $ tree -F Books
   Books
   ├── BeejsGuides/
@@ -635,7 +635,7 @@ Recent Changes
 <https://github.com/a3n/miki/issues/6>`__
 
     *AsciiDoc* added.
-    
+
     Fixed/closed 2017.03.31 in Commit
     `3aadf8d
     <https://github.com/a3n/miki/commit/3aadf8d4d17ca3fc8fc313e45f0bd00d7477b742>`__
