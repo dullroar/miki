@@ -363,7 +363,7 @@ Instead:
 
   * After running ``mwk``, the generated html pages are your wiki pages.
 
-See the included $ MWK/ExampleTopic/... for example.
+See the included $MWK/ExampleTopic/... for example.
 
 Here's the top of MyMiki again:
 
