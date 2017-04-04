@@ -137,6 +137,37 @@ via *apt-get*, *yum*, *Synaptic* and click-click-click, etc.
   * ``docutils``, for ``rst2html``.
   * ``rst2pdf``, for ``rst2pdf``.
 
+What if I only use one of the supported markup languages?
+.........................................................
+
+If you know that you'll only use *Markdown*, for example,
+and have no interest in the other markup languages, then:
+
+* Don't install the markup-specific tools that you aren't using.
+  (They're listed as such above.)
+* Don't copy those markup-specific starter files to your wiki:
+
+  * They're each essentially duplicates of each other,
+    written in their respective markup languages.
+
+    * adocStarter.adoc
+    * mdStarter.md
+    * rstStarter.rst
+
+* If *reStructuredText* is one of the markup languages that you *don't* use,
+  then don't copy any of ``ExampleTopic`` to your wiki,
+  as it's all written in rst.
+* Don't create any files that end in a markup suffix that you don't use.
+
+*Miki* looks for all files
+that end in the suffix of any supported markup language,
+and then uses that list to decide what toolchains to call.
+
+If you don't have any ``.adoc`` files, the *AsciiDoc* tools won't be called,
+and everyone gets out alive.
+
+Or you could install the tools anyway,
+and try stuff out when you have a chance.
 
 Installation
 ------------
