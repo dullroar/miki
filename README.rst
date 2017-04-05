@@ -154,17 +154,15 @@ and have no interest in the other markup languages, then:
     * mdStarter.md
     * rstStarter.rst
 
-* If *reStructuredText* is one of the markup languages that you *don't* use,
-  then don't copy any of ``ExampleTopic`` to your wiki,
-  as it's all written in rst.
+* Don't copy ``ExampleTopic`` to your wiki.
 * Don't create any files that end in a markup suffix that you don't use.
 
 *Miki* looks for all files
 that end in the suffix of any supported markup language,
 and then uses that list to decide what toolchains to call.
 
-If you don't have any ``.adoc`` files, the *AsciiDoc* tools won't be called,
-and everyone gets out alive.
+If you don't have any ``.adoc`` files, for example,
+then the *AsciiDoc* tools won't be called, and everyone gets out alive.
 
 Or you could install the tools anyway,
 and try stuff out when you have a chance.
