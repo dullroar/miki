@@ -23,9 +23,21 @@ endif
 ##########################
 ### Create file lists. ###
 
-# Find all meta.json files, for building a catalog.
+# Find all meta.json files,
+# for building a catalog of books/media resources.
 META := $(shell find $(MWK) -type f -name "meta.json")
+
+# If META is empty, so is CATA, and no catalog.json is attempted.
+# Otherwise set CATA to catalog.json, which will be built.
+CATA :=
+meta_stripped := $(strip $(META))
+ifneq ($(meta_stripped),)
 CATA := $(MWK)/catalog.json
+endif
+
+# Site map.
+# There are always wiki files (at least the makefile),
+# so setting this brute force is OK.
 SITE := $(MWK)/sitemap.html
 
 # reStructuredText
