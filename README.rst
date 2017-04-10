@@ -660,23 +660,5 @@ for ideas on how to document your resources.
 Recent Changes
 ==============
 
-`Issue 6: Add AsciiDoc as a supported markup language
-<https://github.com/a3n/miki/issues/6>`__
-
-    *AsciiDoc* added.
-
-    Fixed/closed 2017.03.31 in Commit
-    `3aadf8d
-    <https://github.com/a3n/miki/commit/3aadf8d4d17ca3fc8fc313e45f0bd00d7477b742>`__
-
-`Issue 5: Fix/Improve makefile file recipes
-<https://github.com/a3n/miki/issues/5>`__
-
-    Generated pdf and text files had links to html files,
-    rather than pdf and text. Fixed that.
-
-    Refactored makefile in anticipation of adding *AsciiDoc*.
-
-    Fixed/Closed 2017.03.31 in Commit
-    `cca2452
-    <https://github.com/a3n/miki/commit/cca2452f45dba7983f005d110a53c98fc7a1acaf>`_
+View the `Closed Issues
+<https://github.com/a3n/miki/issues?q=is%3Aissue+is%3Aclosed>`__.
