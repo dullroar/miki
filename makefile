@@ -64,7 +64,8 @@ AHTML := $(ADOC:.adoc=.html)
 ATEXT := $(ADOC:.adoc=.txt)
 APDF := $(ADOC:.adoc=.pdf)
 
-HTML := $(RHTML) $(MHTML) $(AHTML) $(CATA) $(SITE)
+ONLY_HTML := $(RHTML) $(MHTML) $(AHTML)
+HTML := $(ONLY_HTML) $(CATA) $(SITE)
 TEXT := $(RTEXT) $(MTEXT) $(ATEXT)
 PDF := $(RPDF) $(MPDF) $(APDF)
 
@@ -102,22 +103,28 @@ goodlinks: $(HTML)
 	@ echo
 	# Any local links found in files, and the links exist in $(MWK)
 	#
-	@for lk in $$(grep -onE 'href="[^"]*"' $$(find $$MWK -type f) |grep "href=\"/home") ; do \
-	    f=$$(echo $$lk |cut -d ":" -f 3) ; \
-	    f=$$(echo $$f |cut -d "\"" -f 2) ; \
-	    lynx -dump "$$f" 2>1 >/dev/null && echo $$lk ; \
+	@for lk in $$(grep -onE '(href="file:///home|href="/home)[^"]*"' $(ONLY_HTML)) ; do \
+		lk=$$(echo $$lk |sed \
+			-e 's|file://||' \
+			-e 's|href=||' \
+			-e 's|"||g') ; \
+		f=$$(echo $$lk |cut -d ":" -f 3) ; \
+		[ -e $$f ] && echo $$lk ; \
 	done |sort -u
 
 badlinks: $(HTML)
 	@ echo
 	# Any local links found in files, and the links DO NOT EXIST in $(MWK)
-	# From the file on the left of ':', determine the source file,
+	# From the file on the left of ':', determine its markup source file,
 	# and fix the link.
 	#
-	@for lk in $$(grep -onE 'href="[^"]*"' $$(find $$MWK -type f) |grep "href=\"/home") ; do \
-	    f=$$(echo $$lk |cut -d ":" -f 3) ; \
-	    f=$$(echo $$f |cut -d "\"" -f 2) ; \
-	    lynx -dump "$$f" 2>1 >/dev/null || echo $$lk ; \
+	@for lk in $$(grep -onE '(href="file:///home|href="/home)[^"]*"' $(ONLY_HTML)) ; do \
+		lk=$$(echo $$lk |sed \
+			-e 's|file://||' \
+			-e 's|href=||' \
+			-e 's|"||g') ; \
+		f=$$(echo $$lk |cut -d ":" -f 3) ; \
+		[ -e $$f ] || echo $$lk ; \
 	done |sort -u
 
 
