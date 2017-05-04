@@ -20,6 +20,15 @@ $(error You must set environment variable MWK \
 to the top directory of your wiki, MWK = $(MWK))
 endif
 
+# Do we have rst2html?
+RST2HTML := $(shell which rst2html)
+ifeq ($(RST2HTML),)
+RST2HTML := $(shell which rst2html.py)
+endif
+ifeq ($(RST2HTML),)
+$(error Cannot find rst2html or rst2html.py)
+endif
+
 ##########################
 ### Create file lists. ###
 
@@ -163,7 +172,7 @@ s|\x00||g } '
 	# $< to $@
 	#
 	sed $(MWK_TO_HTML_SED) $< \
-	|rst2html --tab-width=4 > $@
+	|$(RST2HTML) --tab-width=4 > $@
 
 %.pdf: %.rst
 	@ echo
@@ -177,7 +186,7 @@ s|\x00||g } '
 	# $< to $@
 	#
 	sed $(MWK_TO_TXT_SED) $< \
-	|rst2html --tab-width=4 > $@
+	|$(RST2HTML) --tab-width=4 > $@
 	lynx -dump -force_html $@ > $@.txt
 	rm -f $@; mv $@.txt $@
 
