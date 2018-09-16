@@ -4,7 +4,7 @@
 # From all meta.json, generate one $MWK/catalog.json.
 # From all files, generate one $MWK/sitemap.html.
 #
-# https://github.com/a3n/miki                                               
+# https://github.com/a3n/miki
 
 # Check if MWK is set.
 mwk_stripped := $(strip $(MWK))
@@ -34,7 +34,7 @@ endif
 
 # Find all meta.json files,
 # for building a catalog of books/media resources.
-META := $(shell find $(MWK) -type f -name "meta.json")
+META := $(shell find -H $(MWK) -type f -name "meta.json")
 
 # If META is empty, so is CATA, and no catalog.json is attempted.
 # Otherwise set CATA to catalog.json, which will be built.
@@ -52,7 +52,7 @@ SITE := $(MWK)/sitemap.html
 # reStructuredText
 # Find all .rst files at $MWK and below.
 # Create corresponding target lists for .html, .txt, .pdf.
-RST := $(shell find $(MWK) -type f -name "*.rst")
+RST := $(shell find -H $(MWK) -type f -name "*.rst")
 RHTML := $(RST:.rst=.html)
 RTEXT := $(RST:.rst=.txt)
 RPDF := $(RST:.rst=.pdf)
@@ -60,7 +60,7 @@ RPDF := $(RST:.rst=.pdf)
 # Markdown
 # Find all .md files at $MWK and below.
 # Create corresponding target lists for .html, .txt, .pdf.
-MD := $(shell find $(MWK) -type f -name "*.md")
+MD := $(shell find -H $(MWK) -type f -name "*.md")
 MHTML := $(MD:.md=.html)
 MTEXT := $(MD:.md=.txt)
 MPDF := $(MD:.md=.pdf)
@@ -68,7 +68,7 @@ MPDF := $(MD:.md=.pdf)
 # AsciiDoc
 # Find all .adoc files at $MWK and below.
 # Create corresponding target lists for .html, .txt, .pdf.
-ADOC := $(shell find $(MWK) -type f -name "*.adoc")
+ADOC := $(shell find -H $(MWK) -type f -name "*.adoc")
 AHTML := $(ADOC:.adoc=.html)
 ATEXT := $(ADOC:.adoc=.txt)
 APDF := $(ADOC:.adoc=.pdf)
