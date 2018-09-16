@@ -97,8 +97,8 @@ via *apt-get*, *yum*, *Synaptic* and click-click-click, etc.
     * *Firefox*: `Navigate Up WE
       <https://addons.mozilla.org/en-US/firefox/addon/navigate-up-we/>`__
       Similar to *Uppity*, has a recent update in December 2016.
-    * *Firefox*: Put this [bookmarklet](https://gist.github.com/dullroar/0bd1e0aaaece075242c6d40cf55e7fe6) in your
-      bookmarks bar. Works in a similar manner to Uppity, removing hashes, then query strings, then one level of
+    * *Firefox*: `Use the bookmarklet in this gist <https://gist.github.com/dullroar/0bd1e0aaaece075242c6d40cf55e7fe6)>`__
+      Works in a similar manner to Uppity, removing hashes, then query strings, then one level of
       the path at a time, but doesn't require you to trust a browser extension.
     * *Chrome*: `Up
       <https://chrome.google.com/webstore/detail/up/iohgglcbddjknnemakghbjadinmopafl>`__
