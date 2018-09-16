@@ -14,7 +14,7 @@ to the top directory of your wiki, MWK is blank or unset)
 endif
 
 # Check if MWK is a directory.
-mwk_dir := $(shell find "$(MWK)" -type d -wholename "$(MWK)")
+mwk_dir := $(shell find -H "$(MWK)" -type d -wholename "$(MWK)")
 ifneq ($(MWK),$(mwk_dir))
 $(error You must set environment variable MWK \
 to the top directory of your wiki, MWK = $(MWK))
